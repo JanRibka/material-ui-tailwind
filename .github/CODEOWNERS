@@ -1,0 +1,20 @@
+# This file is auto-generated, do not modify it manually.
+# run `pnpm generate-codeowners` to update it.
+
+
+/scripts/ @michaldudak @m4theushw
+
+# Packages
+
+/packages/janribkaui-material-ui-tailwind/ @janribka
+/packages/janribkaui-system/ @janribka
+
+# Components - JanRibka UI
+
+/packages/janribkaui-material-ui-tailwind/src/Button/ @janribka
+/packages/janribkaui-material-ui-tailwind/src/ButtonBase/ @janribka
+/packages/janribkaui-material-ui-tailwind/src/ButtonGroup/ @janribka
+/packages/janribkaui-material-ui-tailwind/src/CircularProgress/ @janribka
+/packages/janribkaui-material-ui-tailwind/src/GlobalStyles/ @janribka
+/packages/janribkaui-material-ui-tailwind/src/IconButton/ @janribka
+/packages/janribkaui-material-ui-tailwind/src/LinearProgress/ @janribka
