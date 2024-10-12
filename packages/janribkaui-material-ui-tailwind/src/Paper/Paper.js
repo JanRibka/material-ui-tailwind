@@ -58,7 +58,7 @@ const Paper = React.forwardRef(function Paper(inProps, ref) {
     <PaperRoot
       as={component}
       ownerState={ownerState}
-      className={clsx(classes.root, className, '')}
+      className={clsx(classes.root, className, 'rounded')}
       ref={ref}
       {...other}
       style={{
