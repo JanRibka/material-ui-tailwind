@@ -3,9 +3,9 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import composeClasses from '@mui/utils/composeClasses';
-import useId from '@mui/utils/useId';
-import refType from '@mui/utils/refType';
-import { styled } from '../zero-styled';
+import useId from '@janribkaui/utils/useId';
+import refType from '@janribkaui/utils/refType';
+import { styled } from 'styled-components';
 import { useDefaultProps } from '../DefaultPropsProvider';
 import Input from '../Input';
 import FilledInput from '../FilledInput';
@@ -21,16 +21,6 @@ const variantComponent = {
   standard: Input,
   filled: FilledInput,
   outlined: OutlinedInput,
-};
-
-const useUtilityClasses = (ownerState) => {
-  const { classes } = ownerState;
-
-  const slots = {
-    root: ['root'],
-  };
-
-  return composeClasses(slots, getTextFieldUtilityClass, classes);
 };
 
 const TextFieldRoot = styled(FormControl, {

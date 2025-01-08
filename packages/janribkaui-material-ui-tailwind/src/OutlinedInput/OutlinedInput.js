@@ -11,15 +11,86 @@ import { mergeStyles } from '../utils';
 
 const OutlinedInputRoot = styled(InputBaseRoot)``;
 
-const outlinedInputRootVariants = tv({});
+const outlinedInputRootVariants = tv({
+  base: [
+    'relative',
+    'rounded-borderRadius',
+    'hover:[.MuiOutlinedInput-notchedOutline]:bg-text-primary',
+    "hover-none:hover:[.MuiOutlinedInput-notchedOutline]:bg-['rgba(0, 0, 0, 0.23)']",
+    "dark:hover-none:hover:[.MuiOutlinedInput-notchedOutline]:bg-['rgba(255, 255, 255, 0.23)']",
+  ],
+  variants: {
+    startAdornment: {
+      true: ['pl-[14px]'],
+      false: [],
+    },
+    endAdornment: {
+      true: ['pr-[14px]'],
+      false: [],
+    },
+    multiline: {
+      true: ['p-[16.5px 14px]'],
+      false: [],
+    },
+    size: {
+      small: [],
+    },
+  },
+  compoundVariants: [{ multiline: true, size: 'small', className: ['p-[8.5px 14px]'] }],
+});
 
 const NotchedOutlineRoot = styled(NotchedOutline)``;
 
-const notchedOutlineRootVariants = tv({});
+const notchedOutlineRootVariants = tv({
+  base: [
+    'bg-[rgba(0, 0, 0, 0.23)]',
+    'dark:bg-rgba(255, 255, 255, 0.23)',
+    'group-has-[input:checked]:border-[2px]',
+    'has-[input:disabled]:bg-action-disabled',
+  ],
+  variants: {
+    color: {
+      primary: ['group-has-[input:focused]:bg-primary'],
+      secondary: ['group-has-[input:focused]:bg-secondary'],
+      error: ['group-has-[input:focused]:bg-error'],
+      info: ['group-has-[input:focused]:bg-info'],
+      success: ['group-has-[input:focused]:bg-success'],
+      warning: ['group-has-[input:focused]:bg-warning'],
+    },
+    error: {
+      true: ['bg-error'],
+      false: [],
+    },
+  },
+});
 
 const OutlinedInputInput = styled(InputBaseInput)``;
 
-const outlinedInputInputVariants = tv({});
+const outlinedInputInputVariants = tv({
+  base: [
+    'autofill:rounded-t-[inherit]',
+    'dark:[&:autofill]:shadow-[0_0_0_100px_#266798_inset]',
+    'dark:[&:autofill]:text-white',
+    'dark:[&:autofill]:caret-white',
+  ],
+  variants: {
+    size: {
+      small: ['p-[8.5px 14px]'],
+    },
+    multiline: {
+      true: ['p-0'],
+      false: [],
+    },
+    startAdornment: {
+      true: ['pl-0'],
+      false: [],
+    },
+    endAdornment: {
+      true: ['pr-0'],
+      false: [],
+    },
+  },
+});
 
 const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
   const props = useDefaultProps({ props: inProps, name: 'MuiOutlinedInput' });
@@ -35,8 +106,6 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     ...other
   } = props;
 
-  const classes = useUtilityClasses(props);
-
   const jrFormControl = useFormControl();
   const fcs = formControlState({
     props,
@@ -45,11 +114,27 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
   });
 
   const outlinedInputRoot = React.forwardRef(OutlinedInputRoot, {
-    className: mergeStyles('JrOutlinedInput-root', outlinedInputRootVariants({})),
+    className: mergeStyles(
+      'JrOutlinedInput-root',
+      outlinedInputRootVariants({
+        startAdornment: props.startAdornment,
+        endAdornment: props.endAdornment,
+        multiline: props.multiline,
+        size: props.size,
+      }),
+    ),
   });
 
   const outlinedInputInput = React.forwardRef(OutlinedInputInput, {
-    className: mergeStyles('JrOutlinedInput-input', outlinedInputInputVariants({})),
+    className: mergeStyles(
+      'JrOutlinedInput-input',
+      outlinedInputInputVariants({
+        size: props.size,
+        multiline: props.multiline,
+        startAdornment: props.startAdornment,
+        endAdornment: props.endAdornment,
+      }),
+    ),
   });
 
   const RootSlot = slots.root ?? components.Root ?? outlinedInputRoot;
@@ -60,7 +145,10 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
       slots={{ root: RootSlot, input: InputSlot }}
       renderSuffix={(state) => (
         <NotchedOutlineRoot
-          className={mergeStyles('JrOutlinedInput-notchedOutline', notchedOutlineRootVariants({}))}
+          className={mergeStyles(
+            'JrOutlinedInput-notchedOutline',
+            notchedOutlineRootVariants({ color: fcs.color || 'primary', error: fsc.error }),
+          )}
           label={
             label != null && label !== '' && fcs.required ? (
               <React.Fragment>
