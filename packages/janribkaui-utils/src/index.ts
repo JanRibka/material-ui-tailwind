@@ -10,7 +10,7 @@ export { default as HTMLElementType } from './HTMLElementType';
 // export { default as ponyfillGlobal } from './ponyfillGlobal';
 export { default as refType } from './refType';
 export { default as unstable_capitalize } from './capitalize';
-// export { default as unstable_createChainedFunction } from './createChainedFunction';
+export { default as unstable_createChainedFunction } from './createChainedFunction';
 export { default as unstable_debounce } from './debounce';
 export { default as unstable_deprecatedPropType } from './deprecatedPropType';
 export { default as unstable_isJrElement } from './isJrElement';

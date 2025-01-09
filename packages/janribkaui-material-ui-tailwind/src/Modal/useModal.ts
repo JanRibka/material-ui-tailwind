@@ -1,19 +1,21 @@
 'use client';
 import * as React from 'react';
+
 import {
-  unstable_ownerDocument as ownerDocument,
-  unstable_useForkRef as useForkRef,
-  unstable_useEventCallback as useEventCallback,
   unstable_createChainedFunction as createChainedFunction,
-} from '@mui/utils';
-import extractEventHandlers from '@mui/utils/extractEventHandlers';
+  unstable_ownerDocument as ownerDocument,
+  unstable_useEventCallback as useEventCallback,
+  unstable_useForkRef as useForkRef,
+} from '@janribkaui/utils';
+import extractEventHandlers from '@janribkaui/utils/extractEventHandlers';
+
 import { EventHandlers } from '../utils/types';
-import { ModalManager, ariaHidden } from './ModalManager';
+import { ariaHidden, ModalManager } from './ModalManager';
 import {
+  UseModalBackdropSlotProps,
   UseModalParameters,
   UseModalReturnValue,
   UseModalRootSlotProps,
-  UseModalBackdropSlotProps,
 } from './useModal.types';
 
 function getContainer(container: UseModalParameters['container']) {

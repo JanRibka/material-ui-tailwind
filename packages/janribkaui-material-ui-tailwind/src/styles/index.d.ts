@@ -158,4 +158,4 @@ export { default as shouldSkipGeneratingVar } from './shouldSkipGeneratingVar';
 export { default as private_createTypography } from './createTypography';
 // export { default as private_excludeVariablesFromRoot } from './excludeVariablesFromRoot';
 
-export { getContrastText } from './createColors';
+//export { getContrastText } from './createColors';

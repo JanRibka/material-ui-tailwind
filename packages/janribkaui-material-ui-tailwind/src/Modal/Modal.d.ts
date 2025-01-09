@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { SxProps } from '@mui/system';
-import { OverrideProps } from '@mui/types';
-import { SlotComponentProps } from '../utils/types';
-import { PortalProps } from '../Portal';
-import { Theme } from '../styles';
+
+import { OverrideProps } from '@janribkaui/types';
+
 import Backdrop, { BackdropProps } from '../Backdrop';
 import { OverridableComponent } from '../OverridableComponent';
-import { ModalClasses } from './modalClasses';
+import { PortalProps } from '../Portal';
+import { Theme } from '../styles';
+import { SlotComponentProps } from '../utils/types';
 
 export interface ModalComponentsPropsOverrides {}
 
@@ -51,10 +51,6 @@ export interface ModalOwnProps {
    * A single child content element.
    */
   children: React.ReactElement<unknown>;
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes?: Partial<ModalClasses>;
   /**
    * @ignore
    */
@@ -190,10 +186,6 @@ export interface ModalOwnProps {
     root?: SlotComponentProps<'div', ModalComponentsPropsOverrides, ModalOwnerState>;
     backdrop?: SlotComponentProps<typeof Backdrop, ModalComponentsPropsOverrides, ModalOwnerState>;
   };
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx?: SxProps<Theme>;
 }
 
 export interface ModalTypeMap<

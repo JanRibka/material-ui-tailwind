@@ -15,6 +15,7 @@ import FormControl from '@janribkaui/material-ui-tailwind/FormControl';
 import FormLabel from '@janribkaui/material-ui-tailwind/FormLabel';
 import FormHelperText from '@janribkaui/material-ui-tailwind/FormHelperText';
 import Switch from '@janribkaui/material-ui-tailwind/Switch';
+import TextField from '@janribkaui/material-ui-tailwind/TextField';
 import { FaRegBookmark } from 'react-icons/fa';
 import { FaBookmark } from 'react-icons/fa';
 import { MdOutlineFavoriteBorder } from 'react-icons/md';
@@ -219,6 +220,20 @@ function App() {
               overline text
             </Typography>
           </div>
+        </div>
+      </div>
+
+      <div className="ml-3 mt-3 flex gap-3 w-full">
+        <div className="w-full flex gap-4">
+          <div className="w-1/3">
+            <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+            <TextField id="filled-basic" label="Filled" variant="filled" />
+            <TextField id="standard-basic" label="Standard" variant="standard" />
+          </div>
+
+          <div className="w-1/3"></div>
+
+          <div className="w-1/3"></div>
         </div>
       </div>
 

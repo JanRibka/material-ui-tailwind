@@ -1,8 +1,6 @@
 'use client';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import composeClasses from '@mui/utils/composeClasses';
 import useId from '@janribkaui/utils/useId';
 import refType from '@janribkaui/utils/refType';
 import { styled } from 'styled-components';
@@ -14,8 +12,8 @@ import InputLabel from '../InputLabel';
 import FormControl from '../FormControl';
 import FormHelperText from '../FormHelperText';
 import Select from '../Select';
-import { getTextFieldUtilityClass } from './textFieldClasses';
 import useSlot from '../utils/useSlot';
+import { mergeStyles } from '../utils';
 
 const variantComponent = {
   standard: Input,
@@ -23,11 +21,7 @@ const variantComponent = {
   outlined: OutlinedInput,
 };
 
-const TextFieldRoot = styled(FormControl, {
-  name: 'MuiTextField',
-  slot: 'Root',
-  overridesResolver: (props, styles) => styles.root,
-})({});
+const TextFieldRoot = styled(FormControl)``;
 
 /**
  * The `TextField` is a convenience wrapper for the most common cases (80%).
@@ -62,7 +56,7 @@ const TextFieldRoot = styled(FormControl, {
  * - using the underlying components directly as shown in the demos
  */
 const TextField = React.forwardRef(function TextField(inProps, ref) {
-  const props = useDefaultProps({ props: inProps, name: 'MuiTextField' });
+  const props = useDefaultProps({ props: inProps, name: 'JrTextField' });
   const {
     autoComplete,
     autoFocus = false,
@@ -114,12 +108,10 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
     variant,
   };
 
-  const classes = useUtilityClasses(ownerState);
-
   if (process.env.NODE_ENV !== 'production') {
     if (select && !children) {
       console.error(
-        'MUI: `children` must be passed when using the `TextField` component with `select`.',
+        'JR: `children` must be passed when using the `TextField` component with `select`.',
       );
     }
   }
@@ -219,7 +211,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
 
   return (
     <TextFieldRoot
-      className={clsx(classes.root, className)}
+      className={mergeStyles('JrTextField-root', className)}
       disabled={disabled}
       error={error}
       fullWidth={fullWidth}
@@ -227,7 +219,6 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
       required={required}
       color={color}
       variant={variant}
-      ownerState={ownerState}
       {...other}
     >
       {label != null && label !== '' && (

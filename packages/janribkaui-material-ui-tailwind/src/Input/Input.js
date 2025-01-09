@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import deepmerge from '@mui/utils/deepmerge';
+import deepmerge from '@janribkaui/utils/deepmerge';
 import InputBase from '../InputBase';
 import { styled } from 'styled-components';
 import { useDefaultProps } from '../DefaultPropsProvider';

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { SxProps } from '@mui/system';
-import { Theme } from '..';
+
+import { Theme } from '../';
 import { MenuProps } from '../Menu';
 
 /**
@@ -35,7 +35,6 @@ export interface SelectInputProps<Value = unknown> {
   readOnly?: boolean;
   renderValue?: (value: SelectInputProps<Value>['value']) => React.ReactNode;
   SelectDisplayProps?: React.HTMLAttributes<HTMLDivElement>;
-  sx?: SxProps<Theme>;
   tabIndex?: number;
   value?: Value;
   variant?: 'standard' | 'outlined' | 'filled';

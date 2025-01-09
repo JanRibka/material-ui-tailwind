@@ -27,7 +27,7 @@ const jrAutoFillCancelKeyframe = keyframes`
   }
 `;
 
-const InputBaseRoot = styled(div)``;
+const InputBaseRootBase = styled(div)``;
 
 const inputBaseRootVariants = tv({
   base: [
@@ -67,7 +67,7 @@ const inputBaseRootVariants = tv({
   ],
 });
 
-const InputBaseInput = styled(input)`
+const InputBaseInputBase = styled(input)`
   font: inherit;
   background: none;
   -webkit-tap-highlight-color: transparent;
@@ -444,8 +444,23 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
     type,
   };
 
+  const InputBaseRoot = React.cloneElement(InputBaseRootBase, {
+    className: mergeStyles(inputBaseRootVariants({ multiline, size: fcs.size, fullWidth })),
+  });
+
   const Root = slots.root || components.Root || InputBaseRoot;
   const rootProps = slotProps.root || componentsProps.root || {};
+
+  const InputBaseInput = React.cloneElement(InputBaseInputBase, {
+    className: mergeStyles(
+      inputBaseInputVariants({
+        disableInjectingGlobalStyles,
+        size: fcs.size,
+        multiline,
+        type,
+      }),
+    ),
+  });
 
   const Input = slots.input || components.Input || InputBaseInput;
   inputProps = { ...inputProps, ...(slotProps.input ?? componentsProps.input) };
@@ -466,10 +481,7 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
         {...(!isHostComponent(Root) && {
           ownerState: { ...ownerState, ...rootProps.ownerState },
         })}
-        className={mergeStyles(
-          inputBaseRootVariants({ multiline, size: fcs.size, fullWidth }),
-          className,
-        )}
+        className={className}
       >
         {startAdornment}
         <FormControlContext.Provider value={null}>
@@ -496,15 +508,7 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
               as: InputComponent,
             })}
             ref={handleInputRef}
-            className={mergeStyles(
-              inputBaseInputVariants({
-                disableInjectingGlobalStyles,
-                size: fcs.size,
-                multiline,
-                type,
-              }),
-              inputProps.className,
-            )}
+            className={inputProps.className}
             onBlur={handleBlur}
             onChange={handleChange}
             onFocus={handleFocus}
