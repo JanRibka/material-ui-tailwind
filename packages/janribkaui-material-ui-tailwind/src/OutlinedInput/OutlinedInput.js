@@ -5,11 +5,16 @@ import useFormControl from '../FormControl/useFormControl';
 import formControlState from '../FormControl/formControlState';
 import { styled } from 'styled-components';
 import { useDefaultProps } from '../DefaultPropsProvider';
-import InputBase, { InputBaseRoot, InputBaseInput } from '../InputBase/InputBase';
+import InputBase, {
+  InputBaseRootBase,
+  inputBaseRootVariants,
+  InputBaseInputBase,
+  inputBaseInputVariants,
+} from '../InputBase/InputBase';
 import { tv } from 'tailwind-variants';
 import { mergeStyles } from '../utils';
 
-const OutlinedInputRoot = styled(InputBaseRoot)``;
+const OutlinedInputRoot = styled(InputBaseRootBase)``;
 
 const outlinedInputRootVariants = tv({
   base: [
@@ -37,6 +42,7 @@ const outlinedInputRootVariants = tv({
     },
   },
   compoundVariants: [{ multiline: true, size: 'small', className: ['p-[8.5px 14px]'] }],
+  extend: [inputBaseRootVariants],
 });
 
 const NotchedOutlineRoot = styled(NotchedOutline)``;
@@ -64,7 +70,7 @@ const notchedOutlineRootVariants = tv({
   },
 });
 
-const OutlinedInputInput = styled(InputBaseInput)``;
+const OutlinedInputInput = styled(InputBaseInputBase)``;
 
 const outlinedInputInputVariants = tv({
   base: [
@@ -90,6 +96,7 @@ const outlinedInputInputVariants = tv({
       false: [],
     },
   },
+  extend: [inputBaseInputVariants],
 });
 
 const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
@@ -121,6 +128,7 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
         endAdornment: props.endAdornment,
         multiline: props.multiline,
         size: props.size,
+        fullWidth: props.fullWidth,
       }),
     ),
   });
@@ -133,6 +141,8 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
         multiline: props.multiline,
         startAdornment: props.startAdornment,
         endAdornment: props.endAdornment,
+        disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+        type,
       }),
     ),
   });

@@ -4,11 +4,15 @@ import deepmerge from '@janribkaui/utils/deepmerge';
 import InputBase from '../InputBase';
 import { styled } from 'styled-components';
 import { useDefaultProps } from '../DefaultPropsProvider';
-import { InputBaseRoot, InputBaseInput } from '../InputBase/InputBase';
+import {
+  InputBaseRootBase,
+  inputBaseRootVariants,
+  InputBaseInputBase,
+} from '../InputBase/InputBase';
 import { mergeStyles } from '../utils';
 import { tv } from 'tailwind-variants';
 
-const FilledInputRoot = styled(InputBaseRoot)``;
+const FilledInputRoot = styled(InputBaseRootBase)``;
 
 const filledInputRootVariants = tv({
   base: [
@@ -128,9 +132,10 @@ const filledInputRootVariants = tv({
       className: ['pt-[8px]', 'pb-[9px]'],
     },
   ],
+  extend: [inputBaseRootVariants],
 });
 
-const FilledInputInput = styled(InputBaseInput)``;
+const FilledInputInput = styled(InputBaseInputBase)``;
 
 const filledInputInputVariants = tv({
   base: [
@@ -210,6 +215,7 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
         multiline,
         size: props.size,
         hiddenLabel,
+        fullWidth,
       }),
     ),
   });

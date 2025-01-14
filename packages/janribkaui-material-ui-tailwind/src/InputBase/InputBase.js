@@ -27,9 +27,9 @@ const jrAutoFillCancelKeyframe = keyframes`
   }
 `;
 
-const InputBaseRootBase = styled(div)``;
+export const InputBaseRootBase = styled(div)``;
 
-const inputBaseRootVariants = tv({
+export const inputBaseRootVariants = tv({
   base: [
     'JrInputBase-root',
     'font-normal',
@@ -67,7 +67,7 @@ const inputBaseRootVariants = tv({
   ],
 });
 
-const InputBaseInputBase = styled(input)`
+export const InputBaseInputBase = styled(input)`
   font: inherit;
   background: none;
   -webkit-tap-highlight-color: transparent;
@@ -152,7 +152,7 @@ const InputBaseInputBase = styled(input)`
   }
 `;
 
-const inputBaseInputVariants = tv({
+export const inputBaseInputVariants = tv({
   base: [
     'tracking-inherit',
     'text-current',

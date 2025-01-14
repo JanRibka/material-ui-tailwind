@@ -4,11 +4,16 @@ import deepmerge from '@janribkaui/utils/deepmerge';
 import InputBase from '../InputBase';
 import { styled } from 'styled-components';
 import { useDefaultProps } from '../DefaultPropsProvider';
-import { InputBaseRoot, InputBaseInput } from '../InputBase/InputBase';
+import {
+  InputBaseRootBase,
+  inputBaseRootVariants,
+  InputBaseInputBase,
+  inputBaseInputVariants,
+} from '../InputBase/InputBase';
 import { tv } from 'tailwind-variants';
 import { mergeStyles } from '../utils';
 
-const InputRoot = styled(InputBaseRoot)`
+const InputRootBase = styled(InputBaseRootBase)`
   .hover {
     // Reset on touch devices, it doesn't add specificity
     @media (hover: none) {
@@ -105,9 +110,10 @@ const inputRootVariants = tv({
     },
   ],
   defaultVariants: { formControl: false, disableUnderline: false },
+  extend: [inputBaseRootVariants],
 });
 
-const InputInput = styled(InputBaseInput)``;
+const InputInput = styled(InputBaseInputBase)``;
 
 const Input = React.forwardRef(function Input(inProps, ref) {
   const props = useDefaultProps({ props: inProps, name: 'JrInput' });
@@ -132,18 +138,29 @@ const Input = React.forwardRef(function Input(inProps, ref) {
       ? deepmerge(slotProps ?? componentsPropsProp, inputComponentsProps)
       : inputComponentsProps;
 
-  const inputRoot = React.cloneElement(InputRoot, {
+  const inputRoot = React.cloneElement(InputRootBase, {
     className: mergeStyles(
       'JrInput-root',
       inputRootVariants({
         formControl: props.formControl,
         disableUnderline: props.disableUnderline,
+        multiline,
+        size: props.size,
+        fullWidth,
       }),
     ),
   });
 
   const inputInput = React.cloneElement(InputInput, {
-    className: 'JrInput-input',
+    className: mergeStyles(
+      'JrInput-input',
+      inputBaseInputVariants({
+        disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+        size: props.size,
+        multiline,
+        type,
+      }),
+    ),
   });
 
   const RootSlot = slots.root ?? components.Root ?? inputRoot;
