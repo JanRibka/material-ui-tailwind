@@ -27,7 +27,7 @@ const jrAutoFillCancelKeyframe = keyframes`
   }
 `;
 
-export const InputBaseRootBase = styled(div)``;
+export const InputBaseRootBase = styled.div``;
 
 export const inputBaseRootVariants = tv({
   base: [
@@ -67,7 +67,7 @@ export const inputBaseRootVariants = tv({
   ],
 });
 
-export const InputBaseInputBase = styled(input)`
+export const InputBaseInputBase = styled.input`
   font: inherit;
   background: none;
   -webkit-tap-highlight-color: transparent;
@@ -193,7 +193,7 @@ export const inputBaseInputVariants = tv({
  * It contains a load of style reset and some state logic.
  */
 const InputBase = React.forwardRef(function InputBase(inProps, ref) {
-  const props = useDefaultProps({ props: inProps, name: 'MuiInputBase' });
+  const props = useDefaultProps({ props: inProps, name: 'JrInputBase' });
   const {
     'aria-describedby': ariaDescribedby,
     autoComplete,

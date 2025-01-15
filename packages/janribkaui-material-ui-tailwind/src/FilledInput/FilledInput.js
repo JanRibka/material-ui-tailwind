@@ -170,11 +170,13 @@ const filledInputInputVariants = tv({
       false: [],
     },
   },
-  compoundVariants: {
-    hiddenLabel: false,
-    size: 'small',
-    className: ['pt-[8px]', 'pb-[9px]'],
-  },
+  compoundVariants: [
+    {
+      hiddenLabel: false,
+      size: 'small',
+      className: ['pt-[8px]', 'pb-[9px]'],
+    },
+  ],
 });
 
 const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {

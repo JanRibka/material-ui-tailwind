@@ -100,7 +100,7 @@ const outlinedInputInputVariants = tv({
 });
 
 const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
-  const props = useDefaultProps({ props: inProps, name: 'MuiOutlinedInput' });
+  const props = useDefaultProps({ props: inProps, name: 'JrOutlinedInput' });
   const {
     components = {},
     fullWidth = false,
@@ -157,7 +157,7 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
         <NotchedOutlineRoot
           className={mergeStyles(
             'JrOutlinedInput-notchedOutline',
-            notchedOutlineRootVariants({ color: fcs.color || 'primary', error: fsc.error }),
+            notchedOutlineRootVariants({ color: fcs.color || 'primary', error: fcs.error }),
           )}
           label={
             label != null && label !== '' && fcs.required ? (
