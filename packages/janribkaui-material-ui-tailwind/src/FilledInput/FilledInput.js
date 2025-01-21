@@ -205,7 +205,38 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
     type,
   };
 
-  const filledInputRoot = React.cloneElement(FilledInputRoot, {
+  // const filledInputRoot = React.cloneElement(FilledInputRoot, {
+  //   className: mergeStyles(
+  //     'JrFilledInput-root',
+  //     filledInputRootVariants({
+  //       disableUnderline,
+  //       error: props.error,
+  //       color: props.color,
+  //       startAdornment: props.startAdornment,
+  //       endAdornment: props.endAdornment,
+  //       multiline,
+  //       size: props.size,
+  //       hiddenLabel,
+  //       fullWidth,
+  //     }),
+  //   ),
+  // });
+
+  // const filledInputInput = React.cloneElement(FilledInputInput, {
+  //   className: mergeStyles(
+  //     'JrFilledInput-input',
+  //     filledInputInputVariants({
+  //       size: props.size,
+  //       hiddenLabel,
+  //       startAdornment: props.startAdornment,
+  //       endAdornment: props.endAdornment,
+  //       multiline,
+  //     }),
+  //   ),
+  // });
+
+  const filledInputRoot = {
+    ...FilledInputRoot,
     className: mergeStyles(
       'JrFilledInput-root',
       filledInputRootVariants({
@@ -220,9 +251,10 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
         fullWidth,
       }),
     ),
-  });
+  };
 
-  const filledInputInput = React.cloneElement(FilledInputInput, {
+  const filledInputInput = {
+    ...FilledInputInput,
     className: mergeStyles(
       'JrFilledInput-input',
       filledInputInputVariants({
@@ -233,7 +265,7 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
         multiline,
       }),
     ),
-  });
+  };
 
   const filledInputComponentsProps = { root: { ownerState }, input: { ownerState } };
 

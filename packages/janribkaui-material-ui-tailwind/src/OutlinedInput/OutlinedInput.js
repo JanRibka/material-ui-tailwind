@@ -120,7 +120,35 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     states: ['color', 'disabled', 'error', 'focused', 'hiddenLabel', 'size', 'required'],
   });
 
-  const outlinedInputRoot = React.forwardRef(OutlinedInputRoot, {
+  // const outlinedInputRoot = React.cloneElement(OutlinedInputRoot, {
+  //   className: mergeStyles(
+  //     'JrOutlinedInput-root',
+  //     outlinedInputRootVariants({
+  //       startAdornment: props.startAdornment,
+  //       endAdornment: props.endAdornment,
+  //       multiline: props.multiline,
+  //       size: props.size,
+  //       fullWidth: props.fullWidth,
+  //     }),
+  //   ),
+  // });
+
+  // const outlinedInputInput = React.cloneElement(OutlinedInputInput, {
+  //   className: mergeStyles(
+  //     'JrOutlinedInput-input',
+  //     outlinedInputInputVariants({
+  //       size: props.size,
+  //       multiline: props.multiline,
+  //       startAdornment: props.startAdornment,
+  //       endAdornment: props.endAdornment,
+  //       disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+  //       type,
+  //     }),
+  //   ),
+  // });
+
+  const outlinedInputRoot = {
+    ...OutlinedInputRoot,
     className: mergeStyles(
       'JrOutlinedInput-root',
       outlinedInputRootVariants({
@@ -131,9 +159,10 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
         fullWidth: props.fullWidth,
       }),
     ),
-  });
+  };
 
-  const outlinedInputInput = React.forwardRef(OutlinedInputInput, {
+  const outlinedInputInput = {
+    ...OutlinedInputInput,
     className: mergeStyles(
       'JrOutlinedInput-input',
       outlinedInputInputVariants({
@@ -145,7 +174,7 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
         type,
       }),
     ),
-  });
+  };
 
   const RootSlot = slots.root ?? components.Root ?? outlinedInputRoot;
   const InputSlot = slots.input ?? components.Input ?? outlinedInputInput;

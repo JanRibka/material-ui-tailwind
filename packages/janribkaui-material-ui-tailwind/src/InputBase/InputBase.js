@@ -428,22 +428,6 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
     }
   }, [jrFormControl, startAdornment]);
 
-  const ownerState = {
-    ...props,
-    color: fcs.color || 'primary',
-    disabled: fcs.disabled,
-    endAdornment,
-    error: fcs.error,
-    focused: fcs.focused,
-    formControl: jrFormControl,
-    fullWidth,
-    hiddenLabel: fcs.hiddenLabel,
-    multiline,
-    size: fcs.size,
-    startAdornment,
-    type,
-  };
-
   const InputBaseRoot = React.cloneElement(InputBaseRootBase, {
     className: mergeStyles(inputBaseRootVariants({ multiline, size: fcs.size, fullWidth })),
   });
@@ -473,16 +457,7 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
         <InputGlobalStyles />
       )}
 
-      <Root
-        {...rootProps}
-        ref={ref}
-        onClick={handleClick}
-        {...other}
-        {...(!isHostComponent(Root) && {
-          ownerState: { ...ownerState, ...rootProps.ownerState },
-        })}
-        className={className}
-      >
+      <Root {...rootProps} ref={ref} onClick={handleClick} {...other} className={className}>
         {startAdornment}
         <FormControlContext.Provider value={null}>
           <Input

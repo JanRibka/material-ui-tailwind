@@ -138,7 +138,33 @@ const Input = React.forwardRef(function Input(inProps, ref) {
       ? deepmerge(slotProps ?? componentsPropsProp, inputComponentsProps)
       : inputComponentsProps;
 
-  const inputRoot = React.cloneElement(InputRootBase, {
+  // const inputRoot = React.cloneElement(InputRootBase, {
+  //   className: mergeStyles(
+  //     'JrInput-root',
+  //     inputRootVariants({
+  //       formControl: props.formControl,
+  //       disableUnderline: props.disableUnderline,
+  //       multiline,
+  //       size: props.size,
+  //       fullWidth,
+  //     }),
+  //   ),
+  // });
+
+  // const inputInput = React.cloneElement(InputInput, {
+  //   className: mergeStyles(
+  //     'JrInput-input',
+  //     inputBaseInputVariants({
+  //       disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+  //       size: props.size,
+  //       multiline,
+  //       type,
+  //     }),
+  //   ),
+  // });
+
+  const inputRoot = {
+    ...InputRootBase,
     className: mergeStyles(
       'JrInput-root',
       inputRootVariants({
@@ -149,9 +175,10 @@ const Input = React.forwardRef(function Input(inProps, ref) {
         fullWidth,
       }),
     ),
-  });
+  };
 
-  const inputInput = React.cloneElement(InputInput, {
+  const inputInput = {
+    ...InputInput,
     className: mergeStyles(
       'JrInput-input',
       inputBaseInputVariants({
@@ -161,7 +188,7 @@ const Input = React.forwardRef(function Input(inProps, ref) {
         type,
       }),
     ),
-  });
+  };
 
   const RootSlot = slots.root ?? components.Root ?? inputRoot;
   const InputSlot = slots.input ?? components.Input ?? inputInput;
