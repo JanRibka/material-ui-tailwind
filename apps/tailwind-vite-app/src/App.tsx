@@ -1,170 +1,169 @@
-import * as React from 'react';
+// import * as React from 'react';
+// import { AiFillAndroid } from 'react-icons/ai';
+// import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
+// import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
+// import { TbArrowBigRightLinesFilled } from 'react-icons/tb';
 
-import Button from '@janribkaui/material-ui-tailwind/Button';
-import { AiFillAndroid } from 'react-icons/ai';
-import { TbArrowBigRightLinesFilled } from 'react-icons/tb';
-import IconButton from '@janribkaui/material-ui-tailwind/IconButton';
-import CircularProgress from '@janribkaui/material-ui-tailwind/CircularProgress';
-import LinearProgress from '@janribkaui/material-ui-tailwind/LinearProgress';
-import LoadingButton from '@janribkaui/material-ui-tailwind/LoadingButton';
-import Checkbox from '@janribkaui/material-ui-tailwind/Checkbox';
-import Typography from '@janribkaui/material-ui-tailwind/Typography';
-import FormGroup from '@janribkaui/material-ui-tailwind/FormGroup';
-import FormControlLabel from '@janribkaui/material-ui-tailwind/FormControlLabel';
-import FormControl from '@janribkaui/material-ui-tailwind/FormControl';
-import FormLabel from '@janribkaui/material-ui-tailwind/FormLabel';
-import FormHelperText from '@janribkaui/material-ui-tailwind/FormHelperText';
-import Switch from '@janribkaui/material-ui-tailwind/Switch';
-import TextField from '@janribkaui/material-ui-tailwind/TextField';
-import { FaRegBookmark } from 'react-icons/fa';
-import { FaBookmark } from 'react-icons/fa';
-import { MdOutlineFavoriteBorder } from 'react-icons/md';
-import { MdOutlineFavorite } from 'react-icons/md';
+// import Button from '@janribkaui/material-ui-tailwind/Button';
+// import Checkbox from '@janribkaui/material-ui-tailwind/Checkbox';
+// import CircularProgress from '@janribkaui/material-ui-tailwind/CircularProgress';
+// import FormControl from '@janribkaui/material-ui-tailwind/FormControl';
+// import FormControlLabel from '@janribkaui/material-ui-tailwind/FormControlLabel';
+// import FormGroup from '@janribkaui/material-ui-tailwind/FormGroup';
+// import FormHelperText from '@janribkaui/material-ui-tailwind/FormHelperText';
+// import FormLabel from '@janribkaui/material-ui-tailwind/FormLabel';
+// import IconButton from '@janribkaui/material-ui-tailwind/IconButton';
+// import LinearProgress from '@janribkaui/material-ui-tailwind/LinearProgress';
+// import LoadingButton from '@janribkaui/material-ui-tailwind/LoadingButton';
+// import Switch from '@janribkaui/material-ui-tailwind/Switch';
+// import Typography from '@janribkaui/material-ui-tailwind/Typography';
 
-function LinearProgressWithLabel(props) {
-  return (
-    <div className="flex items-center">
-      <div className="w-full mr-0.5">
-        <LinearProgress variant="determinate" {...props} />
-      </div>
-      <div className="min-w-9">
-        <span className="text-secondary">{`${Math.round(props.value)}%`}</span>
-      </div>
-    </div>
-  );
-}
+import TextFields from './pages/material-ui/TextField';
+
+// function LinearProgressWithLabel(props: any) {
+//   return (
+//     <div className="flex items-center">
+//       <div className="w-full mr-0.5">
+//         <LinearProgress variant="determinate" {...props} />
+//       </div>
+//       <div className="min-w-9">
+//         <span className="text-secondary">{`${Math.round(props.value)}%`}</span>
+//       </div>
+//     </div>
+//   );
+// }
 
 function App() {
-  const [progress, setProgress] = React.useState(0);
-  const [progressNumber, setProgressNumber] = React.useState(0);
-  const [progressLinear, setProgressLinear] = React.useState(0);
-  const [progressBuffer, setProgressBuffer] = React.useState(0);
-  const [buffer, setBuffer] = React.useState(10);
-  const [loading, setLoading] = React.useState(false);
-  const [checked, setChecked] = React.useState(true);
-  const [checkedIndeterminate, setCheckedIndeterminate] = React.useState([true, false]);
-  const [stateFormLabelCheckbox, setStateFormLabelCheckbox] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
-  const [checkedSwitch, setCheckedSwitch] = React.useState(true);
-  const [stateSwitchFormGroup, setStateSwitchFormGroup] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: true,
-  });
-  const errorFormLabelCheckbox =
-    [
-      stateFormLabelCheckbox.gilad,
-      stateFormLabelCheckbox.jason,
-      stateFormLabelCheckbox.antoine,
-    ].filter((v) => v).length !== 2;
+  // const [progress, setProgress] = React.useState(0);
+  // const [progressNumber, setProgressNumber] = React.useState(0);
+  // const [progressLinear, setProgressLinear] = React.useState(0);
+  // const [progressBuffer, setProgressBuffer] = React.useState(0);
+  // const [buffer, setBuffer] = React.useState(10);
+  // const [loading, setLoading] = React.useState(false);
+  // const [checked, setChecked] = React.useState(true);
+  // const [checkedIndeterminate, setCheckedIndeterminate] = React.useState([true, false]);
+  // const [stateFormLabelCheckbox, setStateFormLabelCheckbox] = React.useState({
+  //   gilad: true,
+  //   jason: false,
+  //   antoine: false,
+  // });
+  // const [checkedSwitch, setCheckedSwitch] = React.useState(true);
+  // const [stateSwitchFormGroup, setStateSwitchFormGroup] = React.useState({
+  //   gilad: true,
+  //   jason: false,
+  //   antoine: true,
+  // });
+  // const errorFormLabelCheckbox =
+  //   [
+  //     stateFormLabelCheckbox.gilad,
+  //     stateFormLabelCheckbox.jason,
+  //     stateFormLabelCheckbox.antoine,
+  //   ].filter((v) => v).length !== 2;
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
-    }, 800);
+  // React.useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
+  //   }, 800);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgressLinear((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 100);
-      });
-    }, 500);
+  // React.useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setProgressLinear((oldProgress) => {
+  //       if (oldProgress === 100) {
+  //         return 0;
+  //       }
+  //       const diff = Math.random() * 10;
+  //       return Math.min(oldProgress + diff, 100);
+  //     });
+  //   }, 500);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
-  const progressBufferRef = React.useRef(() => {});
+  // const progressBufferRef = React.useRef(() => {});
 
-  React.useEffect(() => {
-    progressBufferRef.current = () => {
-      if (progressBuffer === 100) {
-        setProgressBuffer(0);
-        setBuffer(10);
-      } else {
-        setProgressBuffer(progressBuffer + 1);
-        if (buffer < 100 && progressBuffer % 5 === 0) {
-          const newBuffer = buffer + 1 + Math.random() * 10;
-          setBuffer(newBuffer > 100 ? 100 : newBuffer);
-        }
-      }
-    };
-  });
+  // React.useEffect(() => {
+  //   progressBufferRef.current = () => {
+  //     if (progressBuffer === 100) {
+  //       setProgressBuffer(0);
+  //       setBuffer(10);
+  //     } else {
+  //       setProgressBuffer(progressBuffer + 1);
+  //       if (buffer < 100 && progressBuffer % 5 === 0) {
+  //         const newBuffer = buffer + 1 + Math.random() * 10;
+  //         setBuffer(newBuffer > 100 ? 100 : newBuffer);
+  //       }
+  //     }
+  //   };
+  // });
 
-  const handleCheckboxChange = (event) => {
-    setChecked(event.target.checked);
-  };
+  // const handleCheckboxChange = (event: any) => {
+  //   setChecked(event.target.checked);
+  // };
 
-  const handleChangeIndeterminate1 = (event) => {
-    setCheckedIndeterminate([event.target.checked, event.target.checked]);
-  };
+  // const handleChangeIndeterminate1 = (event: any) => {
+  //   setCheckedIndeterminate([event.target.checked, event.target.checked]);
+  // };
 
-  const handleChangeIndeterminate2 = (event) => {
-    setCheckedIndeterminate([event.target.checked, checkedIndeterminate[1]]);
-  };
+  // const handleChangeIndeterminate2 = (event: any) => {
+  //   setCheckedIndeterminate([event.target.checked, checkedIndeterminate[1]]);
+  // };
 
-  const handleChangeIndeterminate3 = (event) => {
-    setCheckedIndeterminate([checkedIndeterminate[0], event.target.checked]);
-  };
+  // const handleChangeIndeterminate3 = (event: any) => {
+  //   setCheckedIndeterminate([checkedIndeterminate[0], event.target.checked]);
+  // };
 
-  const handleChangeFormLabelCheckbox = (event) => {
-    setStateFormLabelCheckbox({
-      ...stateFormLabelCheckbox,
-      [event.target.name]: event.target.checked,
-    });
-  };
+  // const handleChangeFormLabelCheckbox = (event: any) => {
+  //   setStateFormLabelCheckbox({
+  //     ...stateFormLabelCheckbox,
+  //     [event.target.name]: event.target.checked,
+  //   });
+  // };
 
-  const handleChangeSwitch = (event) => {
-    setCheckedSwitch(event.target.checked);
-  };
+  // const handleChangeSwitch = (event: any) => {
+  //   setCheckedSwitch(event.target.checked);
+  // };
 
-  const handleChangeSwitchFormGroup = (event) => {
-    setStateSwitchFormGroup((prev) => {
-      return {
-        ...prev,
-        [event.target.name]: event.target.checked,
-      };
-    });
-  };
+  // const handleChangeSwitchFormGroup = (event: any) => {
+  //   setStateSwitchFormGroup((prev) => {
+  //     return {
+  //       ...prev,
+  //       [event.target.name]: event.target.checked,
+  //     };
+  //   });
+  // };
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      progressBufferRef.current();
-    }, 100);
+  // React.useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     progressBufferRef.current();
+  //   }, 100);
 
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgressNumber((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
-    }, 800);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setProgressNumber((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
+  //   }, 800);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
-  const labelCheckbox = { inputProps: { 'aria-label': 'Checkbox demo' } };
-  const labelSwitch = { inputProps: { 'aria-label': 'Switch demo' } };
+  // const labelCheckbox = { inputProps: { 'aria-label': 'Checkbox demo' } };
+  // const labelSwitch = { inputProps: { 'aria-label': 'Switch demo' } };
 
   return (
     <>
-      <h1>H1</h1>
+      {/* <h1>H1</h1>
       <h2>H2</h2>
       <h3>H3</h3>
       <h4>H4</h4>
@@ -221,9 +220,11 @@ function App() {
             </Typography>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="ml-3 mt-3 flex gap-3 w-full">
+      <TextFields />
+
+      {/* <div className="ml-3 mt-3 flex gap-3 w-full">
         <div className="w-full flex gap-4">
           <div className="w-1/3">
             <TextField id="outlined-basic" label="Outlined" variant="outlined" />
@@ -235,9 +236,9 @@ function App() {
 
           <div className="w-1/3"></div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="ml-3 mt-3 flex gap-3 w-full">
+      {/* <div className="ml-3 mt-3 flex gap-3 w-full">
         <div className="w-full flex gap-4">
           <div className="w-1/3">
             <Switch {...labelSwitch} defaultChecked />
@@ -344,9 +345,9 @@ function App() {
                 />
               </FormGroup>
             </FormControl>
-          </div>
+          </div> */}
 
-          {/* <div className="w-1/3">
+      {/* <div className="w-1/3">
             <FormGroup>
               <FormControlLabel control={<Switch defaultChecked />} label="Label" />
               <FormControlLabel required control={<Switch />} label="Required" />
@@ -354,11 +355,11 @@ function App() {
             </FormGroup>
           </div> */}
 
-          {/* <div className="w-1/3">
+      {/* <div className="w-1/3">
             <Switch {...labelSwitch} defaultChecked size="small" />
             <Switch {...labelSwitch} defaultChecked />
           </div> */}
-        </div>
+      {/* </div>
       </div>
 
       <div className="ml-3 mt-3 flex gap-3 w-full">
@@ -1025,7 +1026,7 @@ function App() {
             Large
           </Button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
