@@ -32,12 +32,12 @@ export const InputBaseRootBase = styled.div``;
 export const inputBaseRootVariants = tv({
   base: [
     'JrInputBase-root',
-    'font-normal',
-    'text-base',
-    'tracking-[0.00938em]',
+    'font-normal', // Replace from typography style (body1)
+    'text-base', // Replace from typography style (body1)
+    'tracking-[0.00938em]', // Replace from typography style (body1)
     'text-text-primary',
-    "leading-['1.4375em']",
-    'box-border',
+    "leading-['1.4375em']", // 23px
+    'box-border', // Prevent padding issue with fullWidth.
     'relative',
     'cursor-text',
     'inline-flex',
@@ -154,6 +154,8 @@ export const InputBaseInputBase = styled.input`
 
 export const inputBaseInputVariants = tv({
   base: [
+    'JrInputBase-input',
+    'font-[inherit]',
     'tracking-inherit',
     'text-current',
     'p-[4px 0 5px]',
@@ -436,14 +438,12 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
   const rootProps = slotProps.root || componentsProps.root || {};
 
   const InputBaseInput = React.cloneElement(InputBaseInputBase, {
-    className: mergeStyles(
-      inputBaseInputVariants({
-        disableInjectingGlobalStyles,
-        size: fcs.size,
-        multiline,
-        type,
-      }),
-    ),
+    className: inputBaseInputVariants({
+      disableInjectingGlobalStyles,
+      size: fcs.size,
+      multiline,
+      type,
+    }),
   });
 
   const Input = slots.input || components.Input || InputBaseInput;

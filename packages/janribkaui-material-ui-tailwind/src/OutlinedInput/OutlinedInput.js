@@ -10,7 +10,7 @@ import InputBase, {
   inputBaseRootVariants,
   InputBaseInputBase,
   inputBaseInputVariants,
-} from '../InputBase/InputBase';
+} from '../InputBase';
 import { tv } from 'tailwind-variants';
 import { mergeStyles } from '../utils';
 
@@ -133,19 +133,19 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
   //   ),
   // });
 
-  // const outlinedInputInput = React.cloneElement(OutlinedInputInput, {
-  //   className: mergeStyles(
-  //     'JrOutlinedInput-input',
-  //     outlinedInputInputVariants({
-  //       size: props.size,
-  //       multiline: props.multiline,
-  //       startAdornment: props.startAdornment,
-  //       endAdornment: props.endAdornment,
-  //       disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-  //       type,
-  //     }),
-  //   ),
-  // });
+  const outlinedInputInput = React.cloneElement(OutlinedInputInput, {
+    className: mergeStyles(
+      'JrOutlinedInput-input',
+      outlinedInputInputVariants({
+        size: props.size,
+        multiline: props.multiline,
+        startAdornment: props.startAdornment,
+        endAdornment: props.endAdornment,
+        disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+        type,
+      }),
+    ),
+  });
 
   const outlinedInputRoot = {
     ...OutlinedInputRoot,
@@ -161,20 +161,20 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     ),
   };
 
-  const outlinedInputInput = {
-    ...OutlinedInputInput,
-    className: mergeStyles(
-      'JrOutlinedInput-input',
-      outlinedInputInputVariants({
-        size: props.size,
-        multiline: props.multiline,
-        startAdornment: props.startAdornment,
-        endAdornment: props.endAdornment,
-        disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-        type,
-      }),
-    ),
-  };
+  // const outlinedInputInput = {
+  //   ...OutlinedInputInput,
+  //   className: mergeStyles(
+  //     'JrOutlinedInput-input',
+  //     outlinedInputInputVariants({
+  //       size: props.size,
+  //       multiline: props.multiline,
+  //       startAdornment: props.startAdornment,
+  //       endAdornment: props.endAdornment,
+  //       disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+  //       type,
+  //     }),
+  //   ),
+  // };
 
   const RootSlot = slots.root ?? components.Root ?? outlinedInputRoot;
   const InputSlot = slots.input ?? components.Input ?? outlinedInputInput;

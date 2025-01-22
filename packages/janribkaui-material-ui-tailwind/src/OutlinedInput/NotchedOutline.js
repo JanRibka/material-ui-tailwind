@@ -69,6 +69,7 @@ const notchedOutlineLegendVariants = tv({
       className: ['max-w-full', 'transition-max-width duration-[100ms] ease-out delay-[50ms]'],
     },
   ],
+  defaultVariants: [{ notched: false }],
 });
 
 /**
@@ -84,7 +85,7 @@ export default function NotchedOutline(props) {
       className={mergeStyles(notchedOutlineRootVariants({ withLabel, notched }), className, '')}
       {...other}
     >
-      <NotchedOutlineLegend className={notchedOutlineLegendVariants({})}>
+      <NotchedOutlineLegend className={notchedOutlineLegendVariants({ withLabel, notched })}>
         {/* Use the nominal use case of the legend, avoid rendering artefacts. */}
         {withLabel ? (
           <span>{label}</span>
