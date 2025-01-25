@@ -18,7 +18,7 @@
 // import Switch from '@janribkaui/material-ui-tailwind/Switch';
 // import Typography from '@janribkaui/material-ui-tailwind/Typography';
 
-import TextFields from './pages/material-ui/TextField';
+import TextFields from './pages/material-ui/TextFields';
 
 // function LinearProgressWithLabel(props: any) {
 //   return (

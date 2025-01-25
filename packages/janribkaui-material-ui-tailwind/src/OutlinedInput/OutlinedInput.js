@@ -10,7 +10,7 @@ import InputBase, {
   inputBaseRootVariants,
   InputBaseInputBase,
   inputBaseInputVariants,
-} from '../InputBase';
+} from '../InputBase/InputBase';
 import { tv } from 'tailwind-variants';
 import { mergeStyles } from '../utils';
 
@@ -42,7 +42,7 @@ const outlinedInputRootVariants = tv({
     },
   },
   compoundVariants: [{ multiline: true, size: 'small', className: ['p-[8.5px 14px]'] }],
-  extend: [inputBaseRootVariants],
+  extend: inputBaseRootVariants,
 });
 
 const NotchedOutlineRoot = styled(NotchedOutline)``;
@@ -74,6 +74,8 @@ const OutlinedInputInput = styled(InputBaseInputBase)``;
 
 const outlinedInputInputVariants = tv({
   base: [
+    'px-[14px]',
+    'py-[16.5px]',
     'autofill:rounded-t-[inherit]',
     'dark:[&:autofill]:shadow-[0_0_0_100px_#266798_inset]',
     'dark:[&:autofill]:text-white',
@@ -96,7 +98,7 @@ const outlinedInputInputVariants = tv({
       false: [],
     },
   },
-  extend: [inputBaseInputVariants],
+  extend: inputBaseInputVariants,
 });
 
 const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
@@ -120,20 +122,8 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     states: ['color', 'disabled', 'error', 'focused', 'hiddenLabel', 'size', 'required'],
   });
 
-  // const outlinedInputRoot = React.cloneElement(OutlinedInputRoot, {
-  //   className: mergeStyles(
-  //     'JrOutlinedInput-root',
-  //     outlinedInputRootVariants({
-  //       startAdornment: props.startAdornment,
-  //       endAdornment: props.endAdornment,
-  //       multiline: props.multiline,
-  //       size: props.size,
-  //       fullWidth: props.fullWidth,
-  //     }),
-  //   ),
-  // });
-
-  const outlinedInputInput = React.cloneElement(OutlinedInputInput, {
+  const outlinedInputInput = {
+    ...OutlinedInputInput,
     className: mergeStyles(
       'JrOutlinedInput-input',
       outlinedInputInputVariants({
@@ -145,7 +135,7 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
         type,
       }),
     ),
-  });
+  };
 
   const outlinedInputRoot = {
     ...OutlinedInputRoot,
@@ -161,27 +151,21 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     ),
   };
 
-  // const outlinedInputInput = {
-  //   ...OutlinedInputInput,
-  //   className: mergeStyles(
-  //     'JrOutlinedInput-input',
-  //     outlinedInputInputVariants({
-  //       size: props.size,
-  //       multiline: props.multiline,
-  //       startAdornment: props.startAdornment,
-  //       endAdornment: props.endAdornment,
-  //       disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-  //       type,
-  //     }),
-  //   ),
-  // };
-
   const RootSlot = slots.root ?? components.Root ?? outlinedInputRoot;
   const InputSlot = slots.input ?? components.Input ?? outlinedInputInput;
+
+  const RootSlotProps =
+    !!!slots.root && !!!components.Root ? { className: outlinedInputRoot.className } : undefined;
+  const InputSlotProps =
+    !!!slots.input && !!!components.Input ? { className: outlinedInputInput.className } : undefined;
 
   return (
     <InputBase
       slots={{ root: RootSlot, input: InputSlot }}
+      slotProps={{
+        root: RootSlotProps,
+        input: InputSlotProps,
+      }}
       renderSuffix={(state) => (
         <NotchedOutlineRoot
           className={mergeStyles(
