@@ -68,7 +68,6 @@ export const inputBaseRootVariants = tv({
 });
 
 export const InputBaseInputBase = styled.input`
-  font: inherit;
   background: none;
   -webkit-tap-highlight-color: transparent;
   &::-webkit-input-placeholder {
@@ -156,9 +155,11 @@ export const inputBaseInputVariants = tv({
   base: [
     'JrInputBase-input',
     'font-[inherit]',
-    'tracking-inherit',
+    'tracking-[inherit]',
     'text-current',
-    'p-[4px 0 5px]',
+    'px-0',
+    'pt-[4px]',
+    'pb-[5px]',
     'border-0',
     'box-content',
     'h-[1.4375em]', // Reset 23px the native input line-height
@@ -436,7 +437,7 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
 
   const Root = slots.root || components.Root || InputBaseRoot;
   const rootProps = slotProps.root || componentsProps.root || {};
-
+  debugger;
   const InputBaseInput = React.cloneElement(InputBaseInputBase, {
     className: inputBaseInputVariants({
       disableInjectingGlobalStyles,
@@ -457,7 +458,13 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
         <InputGlobalStyles />
       )}
 
-      <Root {...rootProps} ref={ref} onClick={handleClick} {...other} className={className}>
+      <Root
+        {...rootProps}
+        ref={ref}
+        onClick={handleClick}
+        {...other}
+        className={mergeStyles(rootProps.className, className)}
+      >
         {startAdornment}
         <FormControlContext.Provider value={null}>
           <Input
