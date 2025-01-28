@@ -49,7 +49,7 @@ const config: Config = {
         noneAuto: '0 0 auto',
       },
       borderRadius: {
-        borderRadius: '4',
+        borderRadius: '4px',
       },
     },
   },

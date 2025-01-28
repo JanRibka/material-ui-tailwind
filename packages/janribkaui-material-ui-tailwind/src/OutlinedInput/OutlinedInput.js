@@ -20,9 +20,9 @@ const outlinedInputRootVariants = tv({
   base: [
     'relative',
     'rounded-borderRadius',
-    'hover:[.MuiOutlinedInput-notchedOutline]:bg-text-primary',
-    "hover-none:hover:[.MuiOutlinedInput-notchedOutline]:bg-['rgba(0, 0, 0, 0.23)']",
-    "dark:hover-none:hover:[.MuiOutlinedInput-notchedOutline]:bg-['rgba(255, 255, 255, 0.23)']",
+    'hover:[.JrOutlinedInput-notchedOutline]:bg-text-primary',
+    "hover-none:hover:[.JrOutlinedInput-notchedOutline]:bg-['rgba(0, 0, 0, 0.23)']",
+    "dark:hover-none:hover:[.JrOutlinedInput-notchedOutline]:bg-['rgba(255, 255, 255, 0.23)']",
   ],
   variants: {
     startAdornment: {
@@ -34,14 +34,14 @@ const outlinedInputRootVariants = tv({
       false: [],
     },
     multiline: {
-      true: ['p-[16.5px 14px]'],
+      true: ['px-[14px] py-[16.5px]'],
       false: [],
     },
     size: {
       small: [],
     },
   },
-  compoundVariants: [{ multiline: true, size: 'small', className: ['p-[8.5px 14px]'] }],
+  compoundVariants: [{ multiline: true, size: 'small', className: ['px-[14px] py-[8.5px]'] }],
   extend: inputBaseRootVariants,
 });
 
@@ -83,7 +83,7 @@ const outlinedInputInputVariants = tv({
   ],
   variants: {
     size: {
-      small: ['p-[8.5px 14px]'],
+      small: ['p-[14px] py-[8.5px]'],
     },
     multiline: {
       true: ['p-0'],
@@ -158,7 +158,7 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     !!!slots.root && !!!components.Root ? { className: outlinedInputRoot.className } : undefined;
   const InputSlotProps =
     !!!slots.input && !!!components.Input ? { className: outlinedInputInput.className } : undefined;
-
+  // TODO: font-family: "Roboto", "Helvetica", "Arial", sans-serif; is missing here. Maybe it is enough to put it as a default font in tw config
   return (
     <InputBase
       slots={{ root: RootSlot, input: InputSlot }}

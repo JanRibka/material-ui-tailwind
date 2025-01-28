@@ -33,10 +33,10 @@ export const inputBaseRootVariants = tv({
   base: [
     'JrInputBase-root',
     'font-normal', // Replace from typography style (body1)
-    'text-base', // Replace from typography style (body1)
+    'text-[1rem]', // Replace from typography style (body1)
     'tracking-[0.00938em]', // Replace from typography style (body1)
     'text-text-primary',
-    "leading-['1.4375em']", // 23px
+    'leading-[1.4375em]', // 23px
     'box-border', // Prevent padding issue with fullWidth.
     'relative',
     'cursor-text',
@@ -46,7 +46,7 @@ export const inputBaseRootVariants = tv({
   ],
   variants: {
     multiline: {
-      true: ['p-[4px 0 5px]'],
+      true: ['pt-[4px] pb-[5x] px-0'],
       false: [],
     },
     size: {
@@ -437,7 +437,7 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
 
   const Root = slots.root || components.Root || InputBaseRoot;
   const rootProps = slotProps.root || componentsProps.root || {};
-  debugger;
+
   const InputBaseInput = React.cloneElement(InputBaseInputBase, {
     className: inputBaseInputVariants({
       disableInjectingGlobalStyles,
