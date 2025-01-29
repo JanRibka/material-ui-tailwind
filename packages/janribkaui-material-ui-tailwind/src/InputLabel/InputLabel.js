@@ -21,14 +21,19 @@ const inputLabelRootVariants = tv({
   ],
   variants: {
     formControl: {
-      true: ['absolute', 'left-0', 'top-0', 'translate-[0 20px]', ' scale-100'],
+      true: ['absolute', 'left-0', 'top-0', 'translate-x-[0px] translate-y-[20px]', ' scale-100'],
       false: [],
     },
     size: {
-      small: ['translate-[0 20px]', 'scale-100'],
+      small: ['translate-x-[0px] translate-y-[20px]', 'scale-100'],
     },
     shrink: {
-      true: ['translate-[0 -1,5px]', 'scale-75', 'origin-top-left', 'max-w-[133%]'],
+      true: [
+        'translate-x-[0px] -translate-y-[1,5px]',
+        'scale-75',
+        'origin-top-left',
+        'max-w-[133%]',
+      ],
       false: [],
     },
     disableAnimation: {
@@ -47,17 +52,17 @@ const inputLabelRootVariants = tv({
         // zIndex: 1 will raise the label above opaque background-colors of input.
         'z-[1]',
         'pointer-events-none',
-        'translate-[12px 16px]',
+        'translate-x-[12px] translate-y-[16px] ',
         'scale-100',
-        'max-w-[calc(100% - 24px)]',
+        'max-w-[calc(100%-24px)]',
       ],
       outlined: [
         // see comment above on filled.zIndex
         'z-[1]',
         'pointer-events-none',
-        'translate-[14px 16px]',
+        'translate-x-[14px] translate-y-[16px]',
         'scale-100',
-        'max-w-[calc(100% - 24px)]',
+        'max-w-[calc(100%-24px)]',
       ],
     },
     size: {
@@ -68,7 +73,7 @@ const inputLabelRootVariants = tv({
     {
       variant: 'filled',
       size: 'small',
-      className: ['translate-[12px 13px]', 'scale-100'],
+      className: ['translate-x-[12px] translate-y-[13px]', 'scale-100'],
     },
     {
       variant: 'filled',
@@ -76,31 +81,31 @@ const inputLabelRootVariants = tv({
       className: [
         'select-none',
         'pointer-events-auto',
-        'translate-[12px 7px]',
+        'translate-x-[12px] translate-y-[7px]',
         'scale-75',
-        'max-w-[calc(100% - 24px)]',
+        'max-w-[calc(100%-24px)]',
       ],
     },
     {
       variant: 'filled',
       shrink: true,
       size: 'small',
-      className: ['translate-[12px 4px]', 'scale-75'],
+      className: ['translate-x-[12px] translate-y-[4px]', 'scale-75'],
     },
     {
       variant: 'outlined',
       size: 'small',
-      className: ['translate-[14px 9px]', 'scale-100'],
+      className: ['translate-x-[14px] translate-y-[9px] ', 'scale-100'],
     },
     {
       variant: 'outlined',
       shrink: true,
       className: [
-        'translate-[14px -9px]',
+        'translate-x-[14px] -translate-y-[9px]',
         'scale-75',
         // Theoretically, we should have (8+5)*2/0.75 = 34px
         // but it feels a better when it bleeds a bit on the left, so 32px.
-        'max-w-[calc(133% - 24px)]',
+        'max-w-[calc(133%-24px)]',
       ],
     },
   ],

@@ -21,8 +21,8 @@ const outlinedInputRootVariants = tv({
     'relative',
     'rounded-borderRadius',
     'hover:[.JrOutlinedInput-notchedOutline]:bg-text-primary',
-    "hover-none:hover:[.JrOutlinedInput-notchedOutline]:bg-['rgba(0, 0, 0, 0.23)']",
-    "dark:hover-none:hover:[.JrOutlinedInput-notchedOutline]:bg-['rgba(255, 255, 255, 0.23)']",
+    'hover-none:hover:[.JrOutlinedInput-notchedOutline]:bg-[rgba(0, 0, 0, 0.23)]',
+    'dark:hover-none:hover:[.JrOutlinedInput-notchedOutline]:bg-[rgba(255, 255, 255, 0.23)]',
   ],
   variants: {
     startAdornment: {
@@ -49,8 +49,8 @@ const NotchedOutlineRoot = styled(NotchedOutline)``;
 
 const notchedOutlineRootVariants = tv({
   base: [
-    'bg-[rgba(0, 0, 0, 0.23)]',
-    'dark:bg-rgba(255, 255, 255, 0.23)',
+    'border-[rgba(0,0,0,0.23)]',
+    'dark:border-[rgba(255,255,255,0.23)]',
     'group-has-[input:checked]:border-[2px]',
     'has-[input:disabled]:bg-action-disabled',
   ],
