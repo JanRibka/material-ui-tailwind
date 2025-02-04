@@ -109,7 +109,7 @@ export const InputBaseInputBase = styled.input`
     -webkit-appearance: none;
   }
   // Show and hide the placeholder logic
-  label[data-shrink='false'] + .MuiFormControl-root & {
+  label[data-shrink='false'] + .JrFormControl-root & {
     &::-webkit-input-placeholder {
       opacity: 0 !important;
     }
@@ -422,7 +422,11 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
 
   const handleAutoFill = (event) => {
     // Provide a fake value as Chrome might not let you access it for security reasons.
-    checkDirty(event.animationName === 'mui-auto-fill-cancel' ? inputRef.current : { value: 'x' });
+    checkDirty(
+      event.animationName === jrAutoFillCancelKeyframe.getName()
+        ? inputRef.current
+        : { value: 'x' },
+    );
   };
 
   React.useEffect(() => {
@@ -449,14 +453,14 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
 
   const Input = slots.input || components.Input || InputBaseInput;
   inputProps = { ...inputProps, ...(slotProps.input ?? componentsProps.input) };
-
+  console.log(inputProps);
   return (
     <React.Fragment>
-      {!disableInjectingGlobalStyles && typeof InputGlobalStyles === 'function' && (
+      {/* {!disableInjectingGlobalStyles && typeof InputGlobalStyles === 'function' && (
         // For Emotion/Styled-components, InputGlobalStyles will be a function
         // For Pigment CSS, this has no effect because the InputGlobalStyles will be null.
         <InputGlobalStyles />
-      )}
+      )} */}
 
       <Root
         {...rootProps}
