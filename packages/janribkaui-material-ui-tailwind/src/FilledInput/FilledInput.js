@@ -267,7 +267,8 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
     ),
   };
 
-  const filledInputComponentsProps = { root: { ownerState }, input: { ownerState } };
+  // const filledInputComponentsProps = { root: { ownerState }, input: { ownerState } };
+  const filledInputComponentsProps = { root: {}, input: {} };
 
   const componentsProps =
     (slotProps ?? componentsPropsProp)
