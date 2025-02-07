@@ -453,7 +453,7 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
 
   const Input = slots.input || components.Input || InputBaseInput;
   inputProps = { ...inputProps, ...(slotProps.input ?? componentsProps.input) };
-  console.log(inputProps);
+
   return (
     <React.Fragment>
       {/* {!disableInjectingGlobalStyles && typeof InputGlobalStyles === 'function' && (

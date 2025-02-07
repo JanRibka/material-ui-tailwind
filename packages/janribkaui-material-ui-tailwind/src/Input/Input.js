@@ -130,39 +130,6 @@ const Input = React.forwardRef(function Input(inProps, ref) {
     ...other
   } = props;
 
-  const ownerState = { disableUnderline };
-  const inputComponentsProps = { root: { ownerState } };
-
-  const componentsProps =
-    (slotProps ?? componentsPropsProp)
-      ? deepmerge(slotProps ?? componentsPropsProp, inputComponentsProps)
-      : inputComponentsProps;
-
-  // const inputRoot = React.cloneElement(InputRootBase, {
-  //   className: mergeStyles(
-  //     'JrInput-root',
-  //     inputRootVariants({
-  //       formControl: props.formControl,
-  //       disableUnderline: props.disableUnderline,
-  //       multiline,
-  //       size: props.size,
-  //       fullWidth,
-  //     }),
-  //   ),
-  // });
-
-  // const inputInput = React.cloneElement(InputInput, {
-  //   className: mergeStyles(
-  //     'JrInput-input',
-  //     inputBaseInputVariants({
-  //       disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-  //       size: props.size,
-  //       multiline,
-  //       type,
-  //     }),
-  //   ),
-  // });
-
   const inputRoot = {
     ...InputRootBase,
     className: mergeStyles(
@@ -189,6 +156,17 @@ const Input = React.forwardRef(function Input(inProps, ref) {
       }),
     ),
   };
+
+  const RootSlotProps =
+    !!!slots.root && !!!components.Root ? { className: inputRoot.className } : undefined;
+  const InputSlotProps =
+    !!!slots.input && !!!components.Input ? { className: inputInput.className } : undefined;
+  const inputComponentsProps = { root: { ...RootSlotProps }, input: { ...InputSlotProps } };
+
+  const componentsProps =
+    (slotProps ?? componentsPropsProp)
+      ? deepmerge(slotProps ?? componentsPropsProp, inputComponentsProps)
+      : inputComponentsProps;
 
   const RootSlot = slots.root ?? components.Root ?? inputRoot;
   const InputSlot = slots.input ?? components.Input ?? inputInput;

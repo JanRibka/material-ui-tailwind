@@ -208,13 +208,13 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     ),
   };
 
-  const RootSlot = slots.root ?? components.Root ?? outlinedInputRoot;
-  const InputSlot = slots.input ?? components.Input ?? outlinedInputInput;
-
   const RootSlotProps =
     !!!slots.root && !!!components.Root ? { className: outlinedInputRoot.className } : undefined;
   const InputSlotProps =
     !!!slots.input && !!!components.Input ? { className: outlinedInputInput.className } : undefined;
+
+  const RootSlot = slots.root ?? components.Root ?? outlinedInputRoot;
+  const InputSlot = slots.input ?? components.Input ?? outlinedInputInput;
   // TODO: font-family: "Roboto", "Helvetica", "Arial", sans-serif; is missing here. Maybe it is enough to put it as a default font in tw config
   return (
     <InputBase
