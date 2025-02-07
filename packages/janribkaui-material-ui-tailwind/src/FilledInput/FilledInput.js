@@ -1,13 +1,13 @@
 'use client';
 import * as React from 'react';
 import deepmerge from '@janribkaui/utils/deepmerge';
-import InputBase from '../InputBase';
 import { styled } from 'styled-components';
 import { useDefaultProps } from '../DefaultPropsProvider';
-import {
+import InputBase, {
   InputBaseRootBase,
   inputBaseRootVariants,
   InputBaseInputBase,
+  inputBaseInputVariants,
 } from '../InputBase/InputBase';
 import { mergeStyles } from '../utils';
 import { tv } from 'tailwind-variants';
@@ -38,7 +38,7 @@ const filledInputRootVariants = tv({
         'after:transition-transform after:duration-shorter after:ease-out',
         'after:pointer-events-none',
         'has-[input:focused]:after:scale-x-100 has-[input:focused]:after:translate-x-0',
-        'before:border-b-[1px] before:border-solid before:border-b-[rgba(0, 0, 0, 0.42) dark:before:border-b-[rgba(255, 255, 255, 0.7)',
+        'before:border-b-[1px] before:border-solid before:border-b-[rgba(0, 0, 0, 0.42) before:dark:border-b-[rgba(255, 255, 255, 0.7)',
         'before:left-0',
         'before:bottom-0',
         'content-["\\00a0"]',
@@ -132,7 +132,7 @@ const filledInputRootVariants = tv({
       className: ['pt-[8px]', 'pb-[9px]'],
     },
   ],
-  extend: [inputBaseRootVariants],
+  extend: inputBaseRootVariants,
 });
 
 const FilledInputInput = styled(InputBaseInputBase)``;
@@ -141,7 +141,7 @@ const filledInputInputVariants = tv({
   base: [
     'pt-[25px]',
     'pr-[12px]',
-    'pb-8px',
+    'pb-[8px]',
     'pl-[12px]',
     'autofill:rounded-t-[inherit]',
     'autofill:rounded-tr-[inherit]',
@@ -177,6 +177,7 @@ const filledInputInputVariants = tv({
       className: ['pt-[8px]', 'pb-[9px]'],
     },
   ],
+  extend: inputBaseInputVariants,
 });
 
 const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
@@ -204,36 +205,6 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
     multiline,
     type,
   };
-
-  // const filledInputRoot = React.cloneElement(FilledInputRoot, {
-  //   className: mergeStyles(
-  //     'JrFilledInput-root',
-  //     filledInputRootVariants({
-  //       disableUnderline,
-  //       error: props.error,
-  //       color: props.color,
-  //       startAdornment: props.startAdornment,
-  //       endAdornment: props.endAdornment,
-  //       multiline,
-  //       size: props.size,
-  //       hiddenLabel,
-  //       fullWidth,
-  //     }),
-  //   ),
-  // });
-
-  // const filledInputInput = React.cloneElement(FilledInputInput, {
-  //   className: mergeStyles(
-  //     'JrFilledInput-input',
-  //     filledInputInputVariants({
-  //       size: props.size,
-  //       hiddenLabel,
-  //       startAdornment: props.startAdornment,
-  //       endAdornment: props.endAdornment,
-  //       multiline,
-  //     }),
-  //   ),
-  // });
 
   const filledInputRoot = {
     ...FilledInputRoot,
@@ -268,7 +239,11 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
   };
 
   // const filledInputComponentsProps = { root: { ownerState }, input: { ownerState } };
-  const filledInputComponentsProps = { root: {}, input: {} };
+  const RootSlotProps =
+    !!!slots.root && !!!components.Root ? { className: filledInputRoot.className } : undefined;
+  const InputSlotProps =
+    !!!slots.input && !!!components.Input ? { className: filledInputInput.className } : undefined;
+  const filledInputComponentsProps = { root: { ...RootSlotProps }, input: { ...InputSlotProps } };
 
   const componentsProps =
     (slotProps ?? componentsPropsProp)
