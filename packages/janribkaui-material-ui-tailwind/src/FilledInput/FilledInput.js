@@ -11,8 +11,14 @@ import InputBase, {
 } from '../InputBase/InputBase';
 import { mergeStyles } from '../utils';
 import { tv } from 'tailwind-variants';
+import useFormControl from '../FormControl/useFormControl';
+import formControlState from '../FormControl/formControlState';
 
-const FilledInputRoot = styled(InputBaseRootBase)``;
+const FilledInputRoot = styled(InputBaseRootBase)`
+  &::before {
+    content: '\u00a0'; // Tailwind CSS does not support space content
+  }
+`;
 
 const filledInputRootVariants = tv({
   base: [
@@ -22,7 +28,6 @@ const filledInputRootVariants = tv({
     'rounded-tr-borderRadius',
     ' transition-background-color duration-shorter ease-out',
     'hover:bg-filledInput-hoverBg hover:hover-none:bg-filledInput-bg',
-    'has-[input:focused]:bg-filledInput-bg',
     'has-[input:disabled]:bg-filledInput-disabledBg',
   ],
   variants: {
@@ -37,11 +42,9 @@ const filledInputRootVariants = tv({
         'after:scale-x-0',
         'after:transition-transform after:duration-shorter after:ease-out',
         'after:pointer-events-none',
-        'has-[input:focused]:after:scale-x-100 has-[input:focused]:after:translate-x-0',
         'before:border-b-[1px] before:border-solid before:border-b-[rgba(0,0,0,0.42)] before:dark:border-b-[rgba(255,255,255,0.7)]',
         'before:left-0',
         'before:bottom-0',
-        "before:content-['\u00a0']",
         'before:absolute',
         'before:right-0',
         'before:transition-border-bottom-color before:duration-shorter',
@@ -78,6 +81,14 @@ const filledInputRootVariants = tv({
       small: '',
     },
     hiddenLabel: { true: '', false: '' },
+    focused: {
+      true: [
+        'bg-filledInput-bg',
+        'hover:bg-filledInput-bg',
+        'after:scale-x-100 after:translate-x-0',
+      ],
+      false: [],
+    },
   },
   compoundVariants: [
     {
@@ -197,46 +208,51 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
     ...other
   } = props;
 
-  const ownerState = {
-    ...props,
+  const jrFormControl = useFormControl();
+  const fcs = formControlState({
+    props,
+    jrFormControl,
+    states: ['focused'],
+  });
+
+  const filledInputRoot = React.useMemo(
+    () => ({
+      ...FilledInputRoot,
+    }),
+    [],
+  );
+
+  const filledInputRootVariantsFilled = filledInputRootVariants({
     disableUnderline,
-    fullWidth,
-    inputComponent,
+    error: props.error,
+    color: props.color,
+    startAdornment: props.startAdornment,
+    endAdornment: props.endAdornment,
     multiline,
-    type,
-  };
+    size: props.size,
+    hiddenLabel,
+    fullWidth,
+    focused: fcs.focused,
+  });
 
-  const filledInputRoot = {
-    ...FilledInputRoot,
-    className: mergeStyles(
-      'JrFilledInput-root',
-      filledInputRootVariants({
-        disableUnderline,
-        error: props.error,
-        color: props.color,
-        startAdornment: props.startAdornment,
-        endAdornment: props.endAdornment,
-        multiline,
-        size: props.size,
-        hiddenLabel,
-        fullWidth,
-      }),
-    ),
-  };
+  filledInputRoot.className = mergeStyles('JrFilledInput-root', filledInputRootVariantsFilled);
 
-  const filledInputInput = {
-    ...FilledInputInput,
-    className: mergeStyles(
-      'JrFilledInput-input',
-      filledInputInputVariants({
-        size: props.size,
-        hiddenLabel,
-        startAdornment: props.startAdornment,
-        endAdornment: props.endAdornment,
-        multiline,
-      }),
-    ),
-  };
+  const filledInputInput = React.useMemo(
+    () => ({
+      ...FilledInputInput,
+      className: mergeStyles(
+        'JrFilledInput-input',
+        filledInputInputVariants({
+          size: props.size,
+          hiddenLabel,
+          startAdornment: props.startAdornment,
+          endAdornment: props.endAdornment,
+          multiline,
+        }),
+      ),
+    }),
+    [props.size, hiddenLabel, props.startAdornment, props.endAdornment, multiline],
+  );
 
   // const filledInputComponentsProps = { root: { ownerState }, input: { ownerState } };
   const RootSlotProps =

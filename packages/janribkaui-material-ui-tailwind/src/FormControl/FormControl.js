@@ -25,9 +25,9 @@ const formControlRootVariants = tv({
   ],
   variants: {
     margin: {
-      dense: ['mt-[0.5rem]', 'mb-[0.25rem]'],
+      dense: ['mt-[8px]', 'mb-[4px]'],
       none: [],
-      normal: ['mt-[1rem]', 'mb-[0.5rem]'],
+      normal: ['mt-[16px]', 'mb-[8px]'],
     },
     fullWidth: {
       true: ['w-full'],

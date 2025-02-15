@@ -454,6 +454,8 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
   const Input = slots.input || components.Input || InputBaseInput;
   inputProps = { ...inputProps, ...(slotProps.input ?? componentsProps.input) };
 
+  const { className: rootPropsClassName, ...rootPropsOtherProps } = rootProps;
+
   return (
     <React.Fragment>
       {/* {!disableInjectingGlobalStyles && typeof InputGlobalStyles === 'function' && (
@@ -463,11 +465,11 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
       )} */}
 
       <Root
-        {...rootProps}
+        {...rootPropsOtherProps}
         ref={ref}
         onClick={handleClick}
         {...other}
-        className={mergeStyles(rootProps.className, className)}
+        className={mergeStyles(rootPropsClassName, className)}
       >
         {startAdornment}
         <FormControlContext.Provider value={null}>

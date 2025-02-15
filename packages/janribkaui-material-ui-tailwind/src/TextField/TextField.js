@@ -202,6 +202,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
       onFocus={onFocus}
       placeholder={placeholder}
       inputProps={htmlInputProps}
+      color={color}
       slots={{
         input: slots.htmlInput ? HtmlInputSlot : undefined,
       }}
