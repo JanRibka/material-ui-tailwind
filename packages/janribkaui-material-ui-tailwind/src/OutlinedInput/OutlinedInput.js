@@ -115,13 +115,16 @@ const notchedOutlineRootVariants = tv({
     'border-[rgba(0,0,0,0.23)]',
     'dark:border-[rgba(255,255,255,0.23)]',
     'group-has-[input:checked]:border-[2px]',
-    'has-[input:disabled]:bg-action-disabled',
   ],
   variants: {
     error: {
       true: ['bg-error'],
       false: [],
     },
+  },
+  disabled: {
+    true: ['bg-action-disabled'],
+    false: [],
   },
 });
 
@@ -245,6 +248,7 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
             'JrOutlinedInput-notchedOutline',
             notchedOutlineRootVariants({
               error: fcs.error,
+              disabled: fcs.disabled,
             }),
           )}
           label={

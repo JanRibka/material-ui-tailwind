@@ -12,6 +12,8 @@ import {
 } from '../InputBase/InputBase';
 import { tv } from 'tailwind-variants';
 import { mergeStyles } from '../utils';
+import useFormControl from '../FormControl/useFormControl';
+import formControlState from '../FormControl/formControlState';
 
 const InputRootBase = styled(InputBaseRootBase)`
   .hover {
@@ -29,37 +31,41 @@ const InputRootBase = styled(InputBaseRootBase)`
       border-bottom: 1px solid rgba(255, 255, 255, 0.7);
     }
   }
+
+  &::before {
+    content: '\u00a0'; // Tailwind CSS does not support space content
+  }
 `;
 
 const inputRootVariants = tv({
-  base: [
-    'border-b-[rgba(0, 0, 0, 0.42)] dark:border-b-[rgba(255, 255, 255, 0.7)]',
-    'relative',
-    'before:border-b-[1px] before:border-b-solid',
-    'before:border-b-[rgba(0, 0, 0, 0.42)] dark:border-b-[rgba(255, 255, 255, 0.7)]',
-    'before:left-0',
-    'before:bottom-0',
-    'before:right-0',
-    "before:content-['\\00a0']",
-    'before:absolute',
-    'before:transition-border-bottom-color before:duration-shorter',
-    'before:pointer-events-none',
-    'hover-not-has-[input:disabled]:border-b-[2px] hover-not-has-[input:disabled]:border-b-solid hover-not-has-[input:disabled]:border-b-text-primary',
-    'hover-not-has-[input:disabled]:hover dark:hover-not-has-[input:disabled]:hover-dark',
-    'has-[input:disabled]:border-b-dotted',
-  ],
+  base: ['relative'],
   variants: {
     formControl: {
-      true: ['[&:has(+label) + &]:mt-[16px]'],
+      true: ['group-has-[label]:mt-[16px]'],
       false: [],
     },
     disableUnderline: {
-      true: [
-        "after:left-0 after:bottom-0 after:right-0 after:content-[''] after:absolute after:scale-x-0",
+      true: ['before:content-[""]'],
+      false: [
+        'before:border-b-[1px]',
+        'before:border-solid',
+        'before:border-b-[rgba(0,0,0,0.42)] dark:before:border-b-[rgba(255,255,255,0.7)]',
+        'before:left-0',
+        'before:bottom-0',
+        'before:right-0',
+        'before:transition-border-bottom-color',
+        'before:duration-shorter',
+        'before:pointer-events-none',
+        'before:absolute',
+        'after:left-0',
+        'after:bottom-0',
+        "after:content-['']",
+        'after:absolute',
+        'after:right-0',
+        'after:scale-x-0',
         'after:transition-transform after:duration-shorter after:ease-out',
-        'has-[input:focused]:after:scale-x-100 has-[input:focused]:after:translate-x-0',
+        'after:pointer-events-none', // Transparent to the hover style.
       ],
-      false: [],
     },
     error: {
       true: ['before:border-b-error', 'after:border-b-error'],
@@ -76,8 +82,21 @@ const inputRootVariants = tv({
       warning: [],
       error: [],
     },
+    focused: {
+      true: [],
+      false: [],
+    },
+    disabled: {
+      true: ['before:border-b-dotted'],
+      false: [],
+    },
   },
   compoundVariants: [
+    {
+      focused: true,
+      disableUnderline: false,
+      className: ['after:scale-x-100', 'after:translate-x-0'],
+    },
     {
       disableUnderline: false,
       color: 'primary',
@@ -108,6 +127,18 @@ const inputRootVariants = tv({
       color: 'error',
       className: 'after:border-b-[2px] after:border-b-solid after:border-b-error',
     },
+    {
+      disabled: false,
+      error: false,
+      className: [
+        'hover:before:border-b-[2px]',
+        'hover:before:border-solid',
+        'hover:before:border-b-text-primary',
+        'hover-none:before:border-b-[1px]',
+        'hover-none:before:border-solid',
+        'hover-none:before:border-b-[rgba(0, 0, 0, 0.42)] dark:hover-none:before:border-b-[rgba(255, 255, 255, 0.7)]',
+      ],
+    },
   ],
   defaultVariants: { formControl: false, disableUnderline: false },
   extend: [inputBaseRootVariants],
@@ -130,32 +161,48 @@ const Input = React.forwardRef(function Input(inProps, ref) {
     ...other
   } = props;
 
-  const inputRoot = {
-    ...InputRootBase,
-    className: mergeStyles(
-      'JrInput-root',
-      inputRootVariants({
-        formControl: props.formControl,
-        disableUnderline: props.disableUnderline,
-        multiline,
-        size: props.size,
-        fullWidth,
-      }),
-    ),
-  };
+  const jrFormControl = useFormControl();
+  const fcs = formControlState({
+    props,
+    jrFormControl,
+    states: ['color', 'disabled', 'error', 'focused', 'hiddenLabel', 'size', 'required'],
+  });
 
-  const inputInput = {
-    ...InputInput,
-    className: mergeStyles(
-      'JrInput-input',
-      inputBaseInputVariants({
-        disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-        size: props.size,
-        multiline,
-        type,
-      }),
-    ),
-  };
+  const inputRoot = React.useMemo(
+    () => ({
+      ...InputRootBase,
+    }),
+    [],
+  );
+
+  const inputRootVariantsFilled = inputRootVariants({
+    formControl: !!jrFormControl,
+    disableUnderline: props.disableUnderline,
+    multiline,
+    size: fcs.size,
+    fullWidth,
+    error: fcs.error,
+    color: fcs.color || 'primary',
+    focused: fcs.focused,
+  });
+
+  inputRoot.className = mergeStyles('JrInput-root', inputRootVariantsFilled);
+
+  const inputInput = React.useMemo(
+    () => ({
+      ...InputInput,
+      className: mergeStyles(
+        'JrInput-input',
+        inputBaseInputVariants({
+          disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+          size: fcs.size,
+          multiline,
+          type,
+        }),
+      ),
+    }),
+    [],
+  );
 
   const RootSlotProps =
     !!!slots.root && !!!components.Root ? { className: inputRoot.className } : undefined;
@@ -170,7 +217,7 @@ const Input = React.forwardRef(function Input(inProps, ref) {
 
   const RootSlot = slots.root ?? components.Root ?? inputRoot;
   const InputSlot = slots.input ?? components.Input ?? inputInput;
-  React.cloneElement;
+
   return (
     <InputBase
       slots={{ root: RootSlot, input: InputSlot }}

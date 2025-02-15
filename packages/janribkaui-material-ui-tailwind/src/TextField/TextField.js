@@ -202,7 +202,6 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
       onFocus={onFocus}
       placeholder={placeholder}
       inputProps={htmlInputProps}
-      color={color}
       slots={{
         input: slots.htmlInput ? HtmlInputSlot : undefined,
       }}
@@ -212,7 +211,7 @@ const TextField = React.forwardRef(function TextField(inProps, ref) {
 
   return (
     <TextFieldRoot
-      className={mergeStyles('JrTextField-root', className)}
+      className={mergeStyles('JrTextField-root', 'group', className)}
       disabled={disabled}
       error={error}
       fullWidth={fullWidth}

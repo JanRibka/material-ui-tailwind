@@ -212,7 +212,7 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
   const fcs = formControlState({
     props,
     jrFormControl,
-    states: ['focused'],
+    states: ['color', 'disabled', 'error', 'focused', 'hiddenLabel', 'size', 'required'],
   });
 
   const filledInputRoot = React.useMemo(
@@ -224,12 +224,12 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
 
   const filledInputRootVariantsFilled = filledInputRootVariants({
     disableUnderline,
-    error: props.error,
-    color: props.color,
+    error: fcs.error,
+    color: fcs.color,
     startAdornment: props.startAdornment,
     endAdornment: props.endAdornment,
     multiline,
-    size: props.size,
+    size: fcs.size,
     hiddenLabel,
     fullWidth,
     focused: fcs.focused,

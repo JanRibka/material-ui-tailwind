@@ -16,6 +16,7 @@ const FormLabelRoot = styled.label``;
 
 const formLabelRootVariants = tv({
   base: [
+    'peer',
     'text-text-secondary',
     'font-normal', // V2: Replace with body1 from createTypography
     'text-[1rem]', // V2: Replace with body1 from createTypography
