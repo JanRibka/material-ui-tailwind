@@ -177,36 +177,52 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     states: ['color', 'disabled', 'error', 'focused', 'hiddenLabel', 'size', 'required'],
   });
 
-  const outlinedInputInput = {
-    ...OutlinedInputInput,
-    className: mergeStyles(
-      'JrOutlinedInput-input',
-      outlinedInputInputVariants({
-        size: props.size,
-        multiline: props.multiline,
-        startAdornment: props.startAdornment,
-        endAdornment: props.endAdornment,
-        disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-        type,
-      }),
-    ),
-  };
+  const outlinedInputRoot = React.useMemo(
+    () => ({
+      ...OutlinedInputRoot,
+    }),
+    [],
+  );
 
-  const outlinedInputRoot = {
-    ...OutlinedInputRoot,
-    className: mergeStyles(
-      'JrOutlinedInput-root',
-      outlinedInputRootVariants({
-        startAdornment: props.startAdornment,
-        endAdornment: props.endAdornment,
-        multiline: props.multiline,
-        size: props.size,
-        fullWidth: props.fullWidth,
-        color: fcs.color || 'primary',
-        focused: fcs.focused,
-      }),
-    ),
-  };
+  const outlinedInputRootVariantsFilled = outlinedInputRootVariants({
+    startAdornment: props.startAdornment,
+    endAdornment: props.endAdornment,
+    multiline: props.multiline,
+    size: props.size,
+    fullWidth: props.fullWidth,
+    color: fcs.color || 'primary',
+    focused: fcs.focused,
+  });
+
+  outlinedInputRoot.className = mergeStyles(
+    'JrOutlinedInput-root',
+    outlinedInputRootVariantsFilled,
+  );
+
+  const outlinedInputInput = React.useMemo(
+    () => ({
+      ...OutlinedInputInput,
+      className: mergeStyles(
+        'JrOutlinedInput-input',
+        outlinedInputInputVariants({
+          size: props.size,
+          multiline: props.multiline,
+          startAdornment: props.startAdornment,
+          endAdornment: props.endAdornment,
+          disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+          type,
+        }),
+      ),
+    }),
+    [
+      props.size,
+      props.multiline,
+      props.startAdornment,
+      props.endAdornment,
+      props.disableInjectingGlobalStyles,
+      type,
+    ],
+  );
 
   const RootSlotProps =
     !!!slots.root && !!!components.Root ? { className: outlinedInputRoot.className } : undefined;
