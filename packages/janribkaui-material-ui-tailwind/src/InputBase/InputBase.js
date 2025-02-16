@@ -42,7 +42,6 @@ export const inputBaseRootVariants = tv({
     'cursor-text',
     'inline-flex',
     'items-center',
-    'disabled:text-text-disabled disabled:cursor-default',
   ],
   variants: {
     multiline: {
@@ -55,6 +54,10 @@ export const inputBaseRootVariants = tv({
     },
     fullWidth: {
       true: ['w-full'],
+      false: [],
+    },
+    disabled: {
+      true: ['text-text-disabled', 'cursor-default'],
       false: [],
     },
   },
@@ -169,7 +172,6 @@ export const inputBaseInputVariants = tv({
     'min-w-0',
     'w-full',
     'dark:theme-dark',
-    'disabled:opacity-100 disabled:webkit-text-fill-text-disabled',
   ],
   variants: {
     disableInjectingGlobalStyles: {
@@ -186,6 +188,10 @@ export const inputBaseInputVariants = tv({
     },
     type: {
       search: ['type-search'],
+    },
+    disabled: {
+      true: ['opacity-100', 'webkit-text-fill-text-disabled'],
+      false: [],
     },
   },
 });
@@ -436,7 +442,10 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
   }, [jrFormControl, startAdornment]);
 
   const InputBaseRoot = React.cloneElement(InputBaseRootBase, {
-    className: mergeStyles(inputBaseRootVariants({ multiline, size: fcs.size, fullWidth })),
+    className: mergeStyles(
+      inputBaseRootVariants({ multiline, size: fcs.size, fullWidth, disabled: fcs.disabled }),
+      className,
+    ),
   });
 
   const Root = slots.root || components.Root || InputBaseRoot;
@@ -448,6 +457,7 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
       size: fcs.size,
       multiline,
       type,
+      disabled: fcs.disabled,
     }),
   });
 

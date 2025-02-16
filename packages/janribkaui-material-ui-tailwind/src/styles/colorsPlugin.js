@@ -7,7 +7,7 @@ const colorsPlugin = plugin.withOptions(
     return ({ addUtilities, theme }) => {
       const newUtilities = {
         '.webkit-text-fill-text-disabled': {
-          '-webkit-text-fill-color': theme('colors.text-disabled'),
+          '-webkit-text-fill-color': theme('colors.text.disabled'),
         },
       };
 

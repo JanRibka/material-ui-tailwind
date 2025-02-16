@@ -26,7 +26,6 @@ const formLabelRootVariants = tv({
     'leading-[1.4375em]',
     'p-0',
     'relative',
-    'disabled:text-text-disabled',
   ],
   variants: {
     color: {
@@ -46,15 +45,18 @@ const formLabelRootVariants = tv({
       true: ['text-error'],
       false: [],
     },
+    disabled: {
+      true: ['text-text-disabled'],
+      false: [],
+    },
   },
   compoundVariants: [
     { focused: true, error: false, color: 'primary', className: ['text-primary'] },
-    { focused: true, error: false, color: 'secondary', className: ['text-primary'] },
-    { focused: true, error: false, color: 'info', className: ['text-primary'] },
-    { focused: true, error: false, color: 'success', className: ['text-primary'] },
-    { focused: true, error: false, color: 'warning', className: ['text-primary'] },
-    { focused: true, error: false, color: 'error', className: ['text-primary'] },
-    { focused: true, error: false, color: 'primary', className: ['text-primary'] },
+    { focused: true, error: false, color: 'secondary', className: ['text-secondary'] },
+    { focused: true, error: false, color: 'info', className: ['text-info'] },
+    { focused: true, error: false, color: 'success', className: ['text-success'] },
+    { focused: true, error: false, color: 'warning', className: ['text-warning'] },
+    { focused: true, error: false, color: 'error', className: ['text-error'] },
   ],
 });
 
@@ -101,6 +103,7 @@ const FormLabel = React.forwardRef(function FormLabel(inProps, ref) {
           color: fcs.color || 'primary',
           error: fcs.error,
           focused: fcs.focused,
+          disabled: fcs.disabled,
         }),
         className,
       )}

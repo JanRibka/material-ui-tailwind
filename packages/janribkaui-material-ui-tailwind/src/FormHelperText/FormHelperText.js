@@ -27,7 +27,6 @@ const formHelperTextRootVariants = tv({
     'mr-0',
     'mb-0',
     'ml-0',
-    'disabled:text-text-disabled',
   ],
   variants: {
     error: {
@@ -41,6 +40,10 @@ const formHelperTextRootVariants = tv({
     contained: {
       true: ['ml-[0.875rem]', 'mr-[0.875rem]'],
       false: [],
+    },
+    disabled: {
+      true: ['text-text-disabled'],
+      false: [''],
     },
   },
 });
@@ -78,6 +81,7 @@ const FormHelperText = React.forwardRef(function FormHelperText(inProps, ref) {
           error: fcs.error,
           size: fcs.size,
           contained: fcs.variant === 'filled' || fcs.variant === 'outlined',
+          disabled: fcs.disabled,
         }),
         className,
         '',

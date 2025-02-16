@@ -16,7 +16,7 @@ import useFormControl from '../FormControl/useFormControl';
 import formControlState from '../FormControl/formControlState';
 
 const InputRootBase = styled(InputBaseRootBase)`
-  .hover {
+  &.hover {
     // Reset on touch devices, it doesn't add specificity
     @media (hover: none) {
       // TODO: Use tailwind hover-none instead
@@ -24,7 +24,7 @@ const InputRootBase = styled(InputBaseRootBase)`
     }
   }
 
-  .hover-dark {
+  &.hover-dark {
     // Reset on touch devices, it doesn't add specificity
     @media (hover: none) {
       // TODO: Use tailwind hover-none instead
@@ -35,13 +35,19 @@ const InputRootBase = styled(InputBaseRootBase)`
   &::before {
     content: '\u00a0'; // Tailwind CSS does not support space content
   }
+
+  &.is-form-control {
+    label + & {
+      margin-top: 16px;
+    }
+  }
 `;
 
 const inputRootVariants = tv({
   base: ['relative'],
   variants: {
     formControl: {
-      true: ['group-has-[label]:mt-[16px]'],
+      true: ['is-form-control'],
       false: [],
     },
     disableUnderline: {
@@ -69,10 +75,7 @@ const inputRootVariants = tv({
     },
     error: {
       true: ['before:border-b-error', 'after:border-b-error'],
-      false: [
-        'hover:before:border-b-[2px] hover:before:border-b-solid hover:before:border-b-text-primary',
-        'hover:hover dark:hover:hover-dark',
-      ],
+      false: [],
     },
     color: {
       primary: [],
@@ -87,7 +90,7 @@ const inputRootVariants = tv({
       false: [],
     },
     disabled: {
-      true: ['before:border-b-dotted'],
+      true: ['before:border-dotted'],
       false: [],
     },
   },
@@ -99,33 +102,44 @@ const inputRootVariants = tv({
     },
     {
       disableUnderline: false,
+      error: false,
       color: 'primary',
-      className: 'after:border-b-[2px] after:border-b-solid after:border-b-primary',
+      className: 'after:border-b-[2px] after:border-solid after:border-b-primary',
     },
     {
       disableUnderline: false,
+      error: false,
       color: 'secondary',
-      className: 'after:border-b-[2px] after:border-b-solid after:border-b-secondary',
+      className: 'after:border-b-[2px] after:border-solid after:border-b-secondary',
     },
     {
       disableUnderline: false,
+      error: false,
       color: 'info',
-      className: 'after:border-b-[2px] after:border-b-solid after:border-b-info',
+      className: 'after:border-b-[2px] after:border-solid after:border-b-info',
     },
     {
       disableUnderline: false,
+      error: false,
       color: 'success',
-      className: 'after:border-b-[2px] after:border-b-solid after:border-b-success',
+      className: 'after:border-b-[2px] after:border-solid after:border-b-success',
     },
     {
       disableUnderline: false,
+      error: false,
       color: 'warning',
-      className: 'after:border-b-[2px] after:border-b-solid after:border-b-warning',
+      className: 'after:border-b-[2px] after:border-solid after:border-b-warning',
     },
     {
       disableUnderline: false,
+      error: false,
       color: 'error',
-      className: 'after:border-b-[2px] after:border-b-solid after:border-b-error',
+      className: 'after:border-b-[2px] after:border-solid after:border-b-error',
+    },
+    {
+      disableUnderline: false,
+      error: true,
+      className: 'after:border-b-[2px] after:border-solid after:border-b-error',
     },
     {
       disabled: false,
@@ -184,6 +198,7 @@ const Input = React.forwardRef(function Input(inProps, ref) {
     error: fcs.error,
     color: fcs.color || 'primary',
     focused: fcs.focused,
+    disabled: fcs.disabled,
   });
 
   inputRoot.className = mergeStyles('JrInput-root', inputRootVariantsFilled);
@@ -198,6 +213,7 @@ const Input = React.forwardRef(function Input(inProps, ref) {
           size: fcs.size,
           multiline,
           type,
+          disabled: fcs.disabled,
         }),
       ),
     }),

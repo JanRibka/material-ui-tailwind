@@ -26,9 +26,8 @@ const filledInputRootVariants = tv({
     'bg-filledInput-bg dark:bg-filledInput-bg',
     'rounded-tl-borderRadius',
     'rounded-tr-borderRadius',
-    ' transition-background-color duration-shorter ease-out',
+    'transition-background-color duration-shorter ease-out',
     'hover:bg-filledInput-hoverBg hover:hover-none:bg-filledInput-bg',
-    'has-[input:disabled]:bg-filledInput-disabledBg',
   ],
   variants: {
     disableUnderline: {
@@ -49,8 +48,6 @@ const filledInputRootVariants = tv({
         'before:right-0',
         'before:transition-border-bottom-color before:duration-shorter',
         'before:pointer-events-none',
-        'has-[input:disabled]:hover:before:border-b-[1px] has-[input:disabled]:hover:before:border-solid has-[input:disabled]:hover:before:border-b-text-primary',
-        'has-[input:disabled]:before:border-dotted',
       ],
     },
     error: {
@@ -89,6 +86,10 @@ const filledInputRootVariants = tv({
       ],
       false: [],
     },
+    disabled: {
+      true: ['bg-filledInput-disabledBg'],
+      false: [],
+    },
   },
   compoundVariants: [
     {
@@ -125,6 +126,16 @@ const filledInputRootVariants = tv({
       disableUnderline: false,
       color: 'warning',
       className: 'after:border-b-[2px] after:border-solid after:border-b-warning',
+    },
+    {
+      disableUnderline: false,
+      disabled: true,
+      className: [
+        'hover:before:border-b-[1px]',
+        'hover:before:border-solid',
+        'hover:before:border-b-text-primary',
+        'before:border-dotted',
+      ],
     },
     {
       multiline: true,
@@ -221,7 +232,7 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
     }),
     [],
   );
-
+  console.log('disabled', fcs.disabled);
   const filledInputRootVariantsFilled = filledInputRootVariants({
     disableUnderline,
     error: fcs.error,
@@ -233,6 +244,7 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
     hiddenLabel,
     fullWidth,
     focused: fcs.focused,
+    disabled: fcs.disabled,
   });
 
   filledInputRoot.className = mergeStyles('JrFilledInput-root', filledInputRootVariantsFilled);
