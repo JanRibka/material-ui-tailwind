@@ -232,7 +232,7 @@ const FilledInput = React.forwardRef(function FilledInput(inProps, ref) {
     }),
     [],
   );
-  console.log('disabled', fcs.disabled);
+
   const filledInputRootVariantsFilled = filledInputRootVariants({
     disableUnderline,
     error: fcs.error,
