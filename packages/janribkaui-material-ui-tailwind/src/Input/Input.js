@@ -206,18 +206,19 @@ const Input = React.forwardRef(function Input(inProps, ref) {
   const inputInput = React.useMemo(
     () => ({
       ...InputInput,
-      className: mergeStyles(
-        'JrInput-input',
-        inputBaseInputVariants({
-          disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-          size: fcs.size,
-          multiline,
-          type,
-          disabled: fcs.disabled,
-        }),
-      ),
     }),
     [],
+  );
+
+  inputInput.className = mergeStyles(
+    'JrInput-input',
+    inputBaseInputVariants({
+      disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
+      size: fcs.size,
+      multiline,
+      type,
+      disabled: fcs.disabled,
+    }),
   );
 
   const RootSlotProps =

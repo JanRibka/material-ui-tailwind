@@ -1,28 +1,15 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import TextField from '@janribkaui/material-ui-tailwind/TextField';
 
 export default function FormPropsTextFields() {
   return (
-    <Box
-      component="form"
-      sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+    <form
+      className="[&_.JrTextField-root]:m-1 [&_.JrTextField-root]:w-[25ch]"
       noValidate
       autoComplete="off"
     >
       <div>
-        <TextField
-          required
-          id="outlined-required"
-          label="Required"
-          defaultValue="Hello World"
-        />
-        <TextField
-          disabled
-          id="outlined-disabled"
-          label="Disabled"
-          defaultValue="Hello World"
-        />
+        <TextField required id="outlined-required" label="Required" defaultValue="Hello World" />
+        <TextField disabled id="outlined-disabled" label="Disabled" defaultValue="Hello World" />
         <TextField
           id="outlined-password-input"
           label="Password"
@@ -101,12 +88,7 @@ export default function FormPropsTextFields() {
             },
           }}
         />
-        <TextField
-          id="filled-search"
-          label="Search field"
-          type="search"
-          variant="filled"
-        />
+        <TextField id="filled-search" label="Search field" type="search" variant="filled" />
         <TextField
           id="filled-helperText"
           label="Helper text"
@@ -159,12 +141,7 @@ export default function FormPropsTextFields() {
             },
           }}
         />
-        <TextField
-          id="standard-search"
-          label="Search field"
-          type="search"
-          variant="standard"
-        />
+        <TextField id="standard-search" label="Search field" type="search" variant="standard" />
         <TextField
           id="standard-helperText"
           label="Helper text"
@@ -173,6 +150,6 @@ export default function FormPropsTextFields() {
           variant="standard"
         />
       </div>
-    </Box>
+    </form>
   );
 }

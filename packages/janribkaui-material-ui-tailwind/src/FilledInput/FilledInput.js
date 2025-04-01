@@ -86,10 +86,6 @@ const filledInputRootVariants = tv({
       ],
       false: [],
     },
-    disabled: {
-      true: ['bg-filledInput-disabledBg'],
-      false: [],
-    },
   },
   compoundVariants: [
     {
@@ -130,12 +126,11 @@ const filledInputRootVariants = tv({
     {
       disableUnderline: false,
       disabled: true,
-      className: [
-        'hover:before:border-b-[1px]',
-        'hover:before:border-solid',
-        'hover:before:border-b-text-primary',
-        'before:border-dotted',
-      ],
+      className: ['before:border-dotted'],
+    },
+    {
+      disabled: true,
+      className: ['bg-filledInput-disabledBg hover:bg-filledInput-disabledBg'],
     },
     {
       multiline: true,
@@ -152,6 +147,15 @@ const filledInputRootVariants = tv({
       hiddenLabel: true,
       size: 'small',
       className: ['pt-[8px]', 'pb-[9px]'],
+    },
+    {
+      disabled: false,
+      error: false,
+      className: [
+        'hover:before:border-b-[1px]',
+        'hover:before:border-solid',
+        'hover:before:border-b-text-primary',
+      ],
     },
   ],
   extend: inputBaseRootVariants,

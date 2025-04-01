@@ -20,7 +20,6 @@ const outlinedInputRootVariants = tv({
   base: [
     'relative',
     'rounded-borderRadius',
-    '[&_.JrOutlinedInput-notchedOutline]:hover:border-text-primary',
     'hover-none:[&_.JrOutlinedInput-notchedOutline]:hover:border-[rgba(0, 0, 0, 0.23)]',
     'hover-none:[&_.JrOutlinedInput-notchedOutline]:dark:hover:border-[rgba(255, 255, 255, 0.23)]',
   ],
@@ -53,7 +52,6 @@ const outlinedInputRootVariants = tv({
       warning: [],
     },
   },
-
   compoundVariants: [
     { multiline: true, size: 'small', className: ['px-[14px] py-[8.5px]'] },
     {
@@ -61,7 +59,7 @@ const outlinedInputRootVariants = tv({
       color: 'primary',
       className: [
         '[&_.JrOutlinedInput-notchedOutline]:border-primary',
-        "[&_.JrOutlinedInput-notchedOutline]:hover:border-primary'",
+        '[&_.JrOutlinedInput-notchedOutline]:hover:border-primary',
       ],
     },
     {
@@ -69,7 +67,7 @@ const outlinedInputRootVariants = tv({
       color: 'secondary',
       className: [
         '[&_.JrOutlinedInput-notchedOutline]:border-secondary',
-        "[&_.JrOutlinedInput-notchedOutline]:hover:border-secondary'",
+        '[&_.JrOutlinedInput-notchedOutline]:hover:border-secondary',
       ],
     },
     {
@@ -77,7 +75,7 @@ const outlinedInputRootVariants = tv({
       color: 'error',
       className: [
         '[&_.JrOutlinedInput-notchedOutline]:border-error',
-        "[&_.JrOutlinedInput-notchedOutline]:hover:border-error'",
+        '[&_.JrOutlinedInput-notchedOutline]:hover:border-error',
       ],
     },
     {
@@ -85,7 +83,7 @@ const outlinedInputRootVariants = tv({
       color: 'info',
       className: [
         '[&_.JrOutlinedInput-notchedOutline]:border-info',
-        "[&_.JrOutlinedInput-notchedOutline]:hover:border-info'",
+        '[&_.JrOutlinedInput-notchedOutline]:hover:border-info',
       ],
     },
     {
@@ -93,7 +91,7 @@ const outlinedInputRootVariants = tv({
       color: 'success',
       className: [
         '[&_.JrOutlinedInput-notchedOutline]:border-success',
-        "[&_.JrOutlinedInput-notchedOutline]:hover:border-success'",
+        '[&_.JrOutlinedInput-notchedOutline]:hover:border-success',
       ],
     },
     {
@@ -101,8 +99,21 @@ const outlinedInputRootVariants = tv({
       color: 'warning',
       className: [
         '[&_.JrOutlinedInput-notchedOutline]:border-warning',
-        "[&_.JrOutlinedInput-notchedOutline]:hover:border-warning'",
+        '[&_.JrOutlinedInput-notchedOutline]:hover:border-warning',
       ],
+    },
+    {
+      disabled: true,
+      focused: false,
+      className: [
+        '[&_.JrOutlinedInput-notchedOutline]:border-action-disabled',
+        '[&_.JrOutlinedInput-notchedOutline]:hover:border-action-disabled',
+      ],
+    },
+    {
+      disabled: false,
+      focused: false,
+      className: ['[&_.JrOutlinedInput-notchedOutline]:hover:border-text-primary'],
     },
   ],
   extend: inputBaseRootVariants,
@@ -118,13 +129,9 @@ const notchedOutlineRootVariants = tv({
   ],
   variants: {
     error: {
-      true: ['bg-error'],
+      true: ['border-error'],
       false: [],
     },
-  },
-  disabled: {
-    true: ['bg-action-disabled'],
-    false: [],
   },
 });
 
@@ -195,6 +202,7 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
     fullWidth: props.fullWidth,
     color: fcs.color || 'primary',
     focused: fcs.focused,
+    disabled: fcs.disabled,
   });
 
   outlinedInputRoot.className = mergeStyles(
@@ -205,26 +213,21 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
   const outlinedInputInput = React.useMemo(
     () => ({
       ...OutlinedInputInput,
-      className: mergeStyles(
-        'JrOutlinedInput-input',
-        outlinedInputInputVariants({
-          size: props.size,
-          multiline: props.multiline,
-          startAdornment: props.startAdornment,
-          endAdornment: props.endAdornment,
-          disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
-          type,
-        }),
-      ),
     }),
-    [
-      props.size,
-      props.multiline,
-      props.startAdornment,
-      props.endAdornment,
-      props.disableInjectingGlobalStyles,
+    [],
+  );
+
+  outlinedInputInput.className = mergeStyles(
+    'JrOutlinedInput-input',
+    outlinedInputInputVariants({
+      size: props.size,
+      multiline: props.multiline,
+      startAdornment: props.startAdornment,
+      endAdornment: props.endAdornment,
+      disableInjectingGlobalStyles: props.disableInjectingGlobalStyles,
       type,
-    ],
+      disabled: fcs.disabled,
+    }),
   );
 
   const RootSlotProps =
@@ -248,7 +251,6 @@ const OutlinedInput = React.forwardRef(function OutlinedInput(inProps, ref) {
             'JrOutlinedInput-notchedOutline',
             notchedOutlineRootVariants({
               error: fcs.error,
-              disabled: fcs.disabled,
             }),
           )}
           label={

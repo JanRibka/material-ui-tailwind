@@ -441,24 +441,34 @@ const InputBase = React.forwardRef(function InputBase(inProps, ref) {
     }
   }, [jrFormControl, startAdornment]);
 
-  const InputBaseRoot = React.cloneElement(InputBaseRootBase, {
-    className: mergeStyles(
-      inputBaseRootVariants({ multiline, size: fcs.size, fullWidth, disabled: fcs.disabled }),
-      className,
-    ),
-  });
+  const InputBaseRoot = React.useMemo(
+    () => ({
+      ...InputBaseRootBase,
+    }),
+    [],
+  );
+
+  InputBaseRoot.className = mergeStyles(
+    inputBaseRootVariants({ multiline, size: fcs.size, fullWidth, disabled: fcs.disabled }),
+    className,
+  );
 
   const Root = slots.root || components.Root || InputBaseRoot;
   const rootProps = slotProps.root || componentsProps.root || {};
 
-  const InputBaseInput = React.cloneElement(InputBaseInputBase, {
-    className: inputBaseInputVariants({
-      disableInjectingGlobalStyles,
-      size: fcs.size,
-      multiline,
-      type,
-      disabled: fcs.disabled,
+  const InputBaseInput = React.useMemo(
+    () => ({
+      ...InputBaseInputBase,
     }),
+    [],
+  );
+
+  InputBaseInput.className = inputBaseInputVariants({
+    disableInjectingGlobalStyles,
+    size: fcs.size,
+    multiline,
+    type,
+    disabled: fcs.disabled,
   });
 
   const Input = slots.input || components.Input || InputBaseInput;
